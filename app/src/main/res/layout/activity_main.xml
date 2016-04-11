@@ -1,0 +1,60 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:text="MEDITATE NOW >"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/meditate_now"
+        android:background="@drawable/textlines"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MEDITASI BAHASA INDONESIA >"
+        android:id="@+id/meditasi_BI"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@drawable/textlines2"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ASK FOR BLESSING >"
+        android:background="@drawable/textlines2"
+        android:id="@+id/ask_blessing"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="GROUP MEDITATION >"
+        android:background="@drawable/textlines2"
+        android:id="@+id/group_meditasi"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="LEARN PRANIC HEALING >"
+        android:background="@drawable/textlines2"
+        android:id="@+id/learn_ph"
+        />
+
+</LinearLayout>
+</RelativeLayout>
