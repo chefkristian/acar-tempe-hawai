@@ -4,6 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
+
     defaultConfig {
         applicationId "city.stage.com.twinhearts"
         minSdkVersion 16
@@ -25,4 +26,7 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.loopj.android:android-async-http:1.4.4'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+
 }

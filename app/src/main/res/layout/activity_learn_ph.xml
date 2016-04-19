@@ -1,213 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-    <TextView
+    
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/learn_ph2"
+        android:scaleType="fitXY"/>
+    
+    <ListView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="ENTRY LEVEL"
-        android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:id="@+id/list_learn_ph"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textlines"
-        >
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:text="ENTRY LEVEL"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BASIC PRANIC HEALING"
-            android:layout_marginLeft="10dp"/>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/textlines"-->
+        <!-->-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jakarta, 15-16 April"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="BASIC PRANIC HEALING"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Jakarta, 15-16 April"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines2"
-        android:layout_height="wrap_content"
-        >
+    <!--</RelativeLayout>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ACHIEVING ONENESS"
-            android:layout_marginLeft="10dp"/>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines2"-->
+        <!--android:layout_height="wrap_content"-->
+        <!-->-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jakarta, 28-29 May"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="ACHIEVING ONENESS"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines2"
-        android:layout_height="wrap_content">
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Jakarta, 28-29 May"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SUPERBRAIN YOGA"
-            android:layout_marginLeft="10dp"/>
+    <!--</RelativeLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines2"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Solo, 11-12 August"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="SUPERBRAIN YOGA"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Solo, 11-12 August"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
+
+    <!--</RelativeLayout>-->
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OTHERS COURSES"
-        android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="OTHERS COURSES"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"/>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines"
-        android:layout_height="wrap_content">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ADVANCE PRANIC HEALING"
-            android:layout_marginLeft="10dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="ADVANCE PRANIC HEALING"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jakarta 15-16 April"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Jakarta 15-16 April"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines2"
-        android:layout_height="wrap_content">
+    <!--</RelativeLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines2"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PRANIC PSYCHOTHERAPY  "
-            android:layout_marginLeft="10dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="PRANIC PSYCHOTHERAPY  "-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Semarang 5-6 June"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Semarang 5-6 June"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines2"
-        android:layout_height="wrap_content">
+    <!--</RelativeLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines2"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PRANIC CRYSTAL HEALING"
-            android:layout_marginLeft="10dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="PRANIC CRYSTAL HEALING"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Semarang 8-9 July"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Semarang 8-9 July"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines2"
-        android:layout_height="wrap_content">
+    <!--</RelativeLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines2"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PSYCHIC SELF-DEFENSE"
-            android:layout_marginLeft="10dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="PSYCHIC SELF-DEFENSE"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Semarang 8-9 July"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Semarang 8-9 July"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines2"
-        android:layout_height="wrap_content">
+    <!--</RelativeLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines2"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ARHATIC YOGA"
-            android:layout_marginLeft="10dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="ARHATIC YOGA"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Semarang 8-9 July"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Semarang 8-9 July"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/textlines2"
-        android:layout_height="wrap_content">
+    <!--</RelativeLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@drawable/textlines2"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PRANIC FENG SHUI"
-            android:layout_marginLeft="10dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="PRANIC FENG SHUI"-->
+            <!--android:layout_marginLeft="10dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Semarang 8-9 July"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Semarang 8-9 July"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 
 

@@ -1,84 +1,93 @@
 <!-- fragment_screen_slide_page.xml -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+
+<LinearLayout
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_height="wrap_content"
+        android:src="@drawable/reminder"
+        android:scaleType="fitXY"
 
-        <TextView
-            android:padding="16dp"
-            android:lineSpacingMultiplier="1.2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="WHO SHOULD NOT DO THIS MEDITATION:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="1. Anyone who is currently driving or operating heavy machines." />
+        <!--<TextView-->
+            <!--android:padding="16dp"-->
+            <!--android:lineSpacingMultiplier="1.2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="WHO SHOULD NOT DO THIS MEDITATION:"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="2. Person below 16 years old." />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="1. Anyone who is currently driving or operating heavy machines." />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="3. Pregnant ladies." />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="2. Person below 16 years old." />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="4. Patient with heart ailment, hypertension, glaucoma, severe kidney and liver problem." />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="3. Pregnant ladies." />-->
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="4. Patient with heart ailment, hypertension, glaucoma, severe kidney and liver problem." />-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="YANG TIDAK BOLEH MELAKUKAN MEDITASI INI:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:paddingTop="10dp"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="1. Siapapun yang sedang mengendarai kendaraan atau mengoperasikan alat berat."/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="2. Mereka yang usianya di bawah 16 tahun."/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="3. Ibu hamil"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="4. Pasien dengan penyakit jantung, hipertansi, glaukoma, penyakit ginjal dan hati yang serius."/>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="YANG TIDAK BOLEH MELAKUKAN MEDITASI INI:"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:gravity="center_horizontal" />-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="1. Siapapun yang sedang mengendarai kendaraan atau mengoperasikan alat berat."/>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="2. Mereka yang usianya di bawah 16 tahun."/>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="3. Ibu hamil"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="4. Pasien dengan penyakit jantung, hipertansi, glaukoma, penyakit ginjal dan hati yang serius."/>-->
 
 
 
     </LinearLayout>
 
-</ScrollView>
+<!--</ScrollView>-->

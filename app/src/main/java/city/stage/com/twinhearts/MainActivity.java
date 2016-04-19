@@ -56,10 +56,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View view) {
         if  (view.getId() == R.id.meditate_now) {
             Intent intent = new Intent(this,FirsttimeActivity.class);
+            intent.putExtra("meditasi","english");
             startActivity(intent);
         }
         if  (view.getId() == R.id.meditasi_BI) {
             Intent intent = new Intent(this,FirsttimeActivity.class);
+            intent.putExtra("meditasi","indo");
             startActivity(intent);
         }
         if (view.getId() == R.id.ask_blessing) {

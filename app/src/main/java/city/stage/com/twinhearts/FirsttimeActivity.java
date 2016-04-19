@@ -1,6 +1,8 @@
 package city.stage.com.twinhearts;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Button;
  */
 public class FirsttimeActivity extends AppCompatActivity implements View.OnClickListener {
     Button button_ya, button_tidak;
+String bahasa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class FirsttimeActivity extends AppCompatActivity implements View.OnClick
         button_ya.setOnClickListener(this);
         button_tidak.setOnClickListener(this);
 
+        bahasa = getIntent().getExtras().getString("meditasi");
+
     }
 
     @Override
@@ -29,11 +34,13 @@ public class FirsttimeActivity extends AppCompatActivity implements View.OnClick
         if (view.getId() == R.id.button_ya) {
             Intent intent = new Intent(this, ScreenSlidePagerActivity.class);
             intent.putExtra("answer",0);
+            intent.putExtra("meditasi",bahasa);
             startActivity(intent);
         }
         else if (view.getId() == R.id.button_tidak) {
             Intent i = new Intent(this, ScreenSlidePagerActivity.class);
             i.putExtra("answer",1);
+            i.putExtra("meditasi",bahasa);
             startActivity(i);
         }
     }

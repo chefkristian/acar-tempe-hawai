@@ -9,11 +9,15 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,13 +40,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by indomegabyte on 31/03/16.
  */
-public class AskblessingActivity extends AppCompatActivity implements View.OnClickListener {
+public class AskblessingActivity extends AppCompatActivity {
 
     TextView nama_profile;
     Button button_submit;
@@ -50,15 +69,15 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
     LoginButton button_facebook;
     private CallbackManager callbackManager;
     ProfilePictureView profilePictureView;
-    EditText info;
+    EditText et_info;
     AccessTokenTracker accessTokenTracker;
     AccessToken accessToken;
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
     Profile profile;
     ProfileTracker profileTracker;
-
-
+    public static String URL = "<http://twinheart.stage.city/twinheartapi/saveBlessing>";
+    Bitmap bitmap;
 
 
     @Override
@@ -71,7 +90,7 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
 
 
         setContentView(R.layout.activity_askblessing);
-        info = (EditText) findViewById(R.id.info);
+        et_info = (EditText) findViewById(R.id.info);
         nama_profile = (TextView) findViewById(R.id.nama_profile);
         button_submit = (Button) findViewById(R.id.button_submit);
         button_upload = (ImageView) findViewById(R.id.button_upload);
@@ -80,7 +99,7 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
         button_facebook = (LoginButton) findViewById(R.id.button_facebook);
         profilePictureView = (ProfilePictureView) findViewById(R.id.profil_image);
         profilePictureView.setVisibility(View.GONE);
-        info.setVisibility(View.GONE);
+        et_info.setVisibility(View.GONE);
         nama_profile.setVisibility(View.GONE);
         button_submit.setVisibility(View.GONE);
 //        button_camera.setVisibility(View.GONE);
@@ -90,12 +109,12 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
         // ini check login ga
-        if(accessToken!=null){
+        if (accessToken != null) {
             profile = Profile.getCurrentProfile();
             nama_profile.setText(profile.getName() + "");
             profilePictureView.setVisibility(View.VISIBLE);
             profilePictureView.setProfileId(accessToken.getUserId());
-            info.setVisibility(View.VISIBLE);
+            et_info.setVisibility(View.VISIBLE);
             nama_profile.setVisibility(View.VISIBLE);
             button_submit.setVisibility(View.VISIBLE);
             button_upload.setVisibility(View.VISIBLE);
@@ -113,19 +132,14 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
                 if (currentAccessToken == null) {
                     //User logged out
                     profilePictureView.setVisibility(View.GONE);
-                    info.setVisibility(View.GONE);
+                    et_info.setVisibility(View.GONE);
                     button_submit.setVisibility(View.GONE);
                     button_upload.setVisibility(View.GONE);
 //                    button_camera.setVisibility(View.GONE);
                     gambar_upload.setVisibility(View.GONE);
                     nama_profile.setVisibility(View.GONE);
 
-                }
-
-             else {
-
-
-
+                } else {
 
 
                 }
@@ -147,14 +161,12 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
                 nama_profile.setText(profile.getName() + "");
                 profilePictureView.setVisibility(View.VISIBLE);
                 profilePictureView.setProfileId(loginResult.getAccessToken().getUserId());
-                info.setVisibility(View.VISIBLE);
+                et_info.setVisibility(View.VISIBLE);
                 nama_profile.setVisibility(View.VISIBLE);
                 button_submit.setVisibility(View.VISIBLE);
                 button_upload.setVisibility(View.VISIBLE);
 //                button_camera.setVisibility(View.VISIBLE);
                 gambar_upload.setVisibility(View.VISIBLE);
-
-
 
 
             }
@@ -176,11 +188,101 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
 
         });
 
+        button_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+// Start the Intent
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+
+            }
+        });
+
+        button_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveBlessing");
+
+//
+//                String info = et_info.getEditableText().toString();
+//
+//                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
+//
+////                Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(), R.id.gambar_upload);
+//                bitmap = ((BitmapDrawable) gambar_upload.getDrawable()).getBitmap();
+//                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+//                byte [] ba = bao.toByteArray();
+//                String ba1= Base64.encodeToString(ba, Base64.DEFAULT);
+
+//                HttpClient httpclient = new DefaultHttpClient();
+//                String responseStr="";
+////                String URL= SyncStateContract.Constants.API_URL+"details/";
+//                HttpPost httppost = new HttpPost("http://twinheart.stage.city/twinheartapi/saveBlessing");
+//
+//                try {
+//                    // Add your data
+//                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//                    nameValuePairs.add(new BasicNameValuePair("msg", info));
+//                    nameValuePairs.add(new BasicNameValuePair("fb_id", fb_id));
+//                    nameValuePairs.add(new BasicNameValuePair("img", ba1));
+//                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//                    // Execute HTTP Post Request
+//                    HttpResponse response = httpclient.execute(httppost);
+//
+//                    int responseCode = response.getStatusLine().getStatusCode();
+//                    switch(responseCode) {
+//                        case 200:
+//                            HttpEntity entity = response.getEntity();
+//                            if(entity != null) {
+//                                String responseBody = EntityUtils.toString(entity);
+//                                responseStr=responseBody;
+//                            }
+//                            break;
+//                    }
+//                } catch (ClientProtocolException e) {
+//                    // TODO Auto-generated catch block
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                }
+//                System.out.println("this is response "+responseStr);
+//
+//                if (info.length() > 0) {
+//                    HttpClient httpclient = new DefaultHttpClient();
+//                    HttpPost httppost = new HttpPost("http://twinheart.stage.city/twinheartapi/saveBlessing");
+//
+//                    try {
+//                        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+////                        nameValuePairs.add(new BasicNameValuePair("id_device", "01"));
+//                        nameValuePairs.add(new BasicNameValuePair("msg", info));
+//                        nameValuePairs.add(new BasicNameValuePair("fb_id", fb_id));
+//                        nameValuePairs.add(new BasicNameValuePair("img",ba1));
+//                        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//                        HttpResponse response = httpclient.execute(httppost);
+//
+//                        et_info.setText(""); //reset the message text field
+//                        Toast.makeText(getBaseContext(), "Sent", Toast.LENGTH_SHORT).show();
+//                    } catch (ClientProtocolException e) {
+//                        e.printStackTrace();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    //display message if text field is empty
+//                    Toast.makeText(getBaseContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+//                }
+            }
+        });
 
 
-
-        button_upload.setOnClickListener(this);
+//        button_upload.setOnClickListener(this);
 //        button_camera.setOnClickListener(this);
+
 
     }
 
@@ -212,17 +314,16 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
+
+
                 ImageView imgView = (ImageView) findViewById(R.id.gambar_upload);
+
                 // Set the Image in ImageView after decoding the String
-
-
-
-
                 imgView.setImageBitmap(decodeSampledBitmapFromResource(imgDecodableString,
-                        80, 60));
+                        150, 150));
 
 
-                imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+//                imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
 
             } else {
@@ -247,8 +348,7 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
 
             // Calculate ratios of height and width to requested height and
             // width
-            final int heightRatio = Math.round((float) height
-                    / (float) reqHeight);
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
             final int widthRatio = Math.round((float) width / (float) reqWidth);
 
             // Choose the smallest ratio as inSampleSize value, this will
@@ -261,6 +361,7 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
         return inSampleSize;
     }
 
+
     public static Bitmap decodeSampledBitmapFromResource(String path,
                                                          int reqWidth, int reqHeight) {
         Log.d("path", path);
@@ -270,8 +371,8 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
         BitmapFactory.decodeFile(path, options);
 
         // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth,
-                reqHeight);
+        options.inSampleSize = calculateInSampleSize(options, 150,
+                150);
 
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
@@ -279,23 +380,122 @@ public class AskblessingActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case (R.id.button_upload): {
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    private class MyAsyncTask extends AsyncTask<String, Void, String> {
 
-// Start the Intent
-                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+        @Override
+        protected String doInBackground(String... params) {
+//            // TODO Auto-generated method stub
+//            postData(params[0]);
+//            return null;
+            BufferedReader inBuffer = null;
+            String url = "http://twinheart.stage.city/twinheartapi/saveBlessing";
+            String result = "fail";
+            try {
+                String info = et_info.getEditableText().toString();
 
+                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
+
+
+                gambar_upload.buildDrawingCache();
+                Bitmap bmp = gambar_upload.getDrawingCache();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG,100,stream);
+                byte [] byteArray = stream.toByteArray();
+                String byteArray1 = Base64.encodeToString(byteArray,Base64.DEFAULT);
+                Log.d("bas64",byteArray1);
+
+//                Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(), R.id.gambar_upload);
+//                bitmap = ((BitmapDrawable) gambar_upload.getDrawable()).getBitmap();
+//                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+//                byte [] ba = bao.toByteArray();
+//                String ba1= Base64.encodeToString(ba, Base64.DEFAULT);
+//                Log.d(ba1, "gambar upload");
+
+
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPost request = new HttpPost(url);
+                List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+                postParameters.add(new BasicNameValuePair("msg", info));
+                postParameters.add(new BasicNameValuePair("fb_id", fb_id));
+                postParameters.add(new BasicNameValuePair("img", byteArray1));
+                postParameters.add(new BasicNameValuePair("name", params[0]));
+
+                UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(
+                        postParameters);
+
+                request.setEntity(formEntity);
+                httpClient.execute(request);
+                result="got it";
+
+            } catch(Exception e) {
+                // Do something about exceptions
+                result = e.getMessage();
+            } finally {
+                if (inBuffer != null) {
+                    try {
+                        inBuffer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
+            return  result;
         }
+
+        protected void onPostExecute(String result){
+//            pb.setVisibility(View.GONE);
+            et_info.setText("");
+            gambar_upload.setImageDrawable(null);
+            Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
+        }
+//        protected void onProgressUpdate(String... progress){
+////            pb.setProgress(progress[0]);
+//        }
+//
+//        public void postData(String valueIWantToSend) {
+//            // Create a new HttpClient and Post Header
+//
+//                String info = et_info.getEditableText().toString();
+//
+//                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
+//
+////                Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(), R.id.gambar_upload);
+//                bitmap = ((BitmapDrawable) gambar_upload.getDrawable()).getBitmap();
+//                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+//                byte [] ba = bao.toByteArray();
+//                String ba1= Base64.encodeToString(ba, Base64.DEFAULT);
+//
+//            HttpClient httpclient = new DefaultHttpClient();
+//            HttpPost httppost = new HttpPost("http://twinheart.stage.city/twinheartapi/saveBlessing");
+//
+//            try {
+//                // Add your data
+//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//                nameValuePairs.add(new BasicNameValuePair("msg", info));
+//                nameValuePairs.add(new BasicNameValuePair("fb_id", fb_id));
+//                nameValuePairs.add(new BasicNameValuePair("img", ba1));
+//                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//                // Execute HTTP Post Request
+//                HttpResponse response = httpclient.execute(httppost);
+//
+//            } catch (ClientProtocolException e) {
+//                // TODO Auto-generated catch block
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//            }
+//        }
+//
     }
-
-
 }
+
+
+
+
+
+
 
 
 

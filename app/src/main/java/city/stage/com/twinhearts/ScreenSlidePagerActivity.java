@@ -39,6 +39,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
      */
     private PagerAdapter mPagerAdapter;
     Button prev_button, next_button;
+    String bahasa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,8 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
         }
 
+        bahasa = getIntent().getExtras().getString("meditasi");
+
 
 
 
@@ -138,6 +141,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                     finish();
                     Intent i = new Intent(view.getContext(),MeditationActivity.class);
 //                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra("meditasi",bahasa);
                     startActivity(i);
                 }
 
