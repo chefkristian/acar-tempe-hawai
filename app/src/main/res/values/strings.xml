@@ -4,4 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">1747677068852204</string>
+    <string name="Server_API_KEY_GCM">AIzaSyCCjMG1xTVSPVDseBAaUeSAl-zANkoIbuw</string>
+    <string name="Sender_ID">959497412037</string>
 </resources>

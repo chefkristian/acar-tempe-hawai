@@ -1,6 +1,7 @@
 package city.stage.com.twinhearts;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -35,6 +38,8 @@ import java.util.List;
 public class SharedActivity extends AppCompatActivity implements View.OnClickListener {
     Button button_share,button_submit_share;
     EditText et_sharing;
+    String MY_PREFS_NAME;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,9 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
 
         button_share.setOnClickListener(this);
         button_submit_share.setOnClickListener(this);
+
+
+
 
 
 
@@ -105,7 +113,19 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
             String url = "http://twinheart.stage.city/twinheartapi/saveFeedback";
             String result = "fail";
             try {
+
+                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                String fb_id= prefs.getString("access token", ("AccessToken.getCurrentAccessToken().getUserId()"));
+
+
+                String restoredText = String.valueOf(fb_id);
+
                 String share = et_sharing.getEditableText().toString();
+
+                InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
+                String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
+                        GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+
 
 //                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
 
@@ -115,7 +135,8 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
                 List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 //                postParameters.add(new BasicNameValuePair("device_id",device_id));
                 postParameters.add(new BasicNameValuePair("msg", share));
-//                postParameters.add(new BasicNameValuePair("fb_id", fb_id));
+                postParameters.add(new BasicNameValuePair("fb_id", restoredText));
+                postParameters.add(new BasicNameValuePair("device_id",token));
                 postParameters.add(new BasicNameValuePair("name", params[0]));
 
                 UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(

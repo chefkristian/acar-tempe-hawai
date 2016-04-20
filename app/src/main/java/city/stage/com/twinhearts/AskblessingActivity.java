@@ -3,8 +3,10 @@ package city.stage.com.twinhearts;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -73,11 +75,12 @@ public class AskblessingActivity extends AppCompatActivity {
     AccessTokenTracker accessTokenTracker;
     AccessToken accessToken;
     private static int RESULT_LOAD_IMG = 1;
-    String imgDecodableString;
+    String imgDecodableString, MY_PREFS_NAME;
     Profile profile;
     ProfileTracker profileTracker;
     public static String URL = "<http://twinheart.stage.city/twinheartapi/saveBlessing>";
     Bitmap bitmap;
+    SharedPreferences pref;
 
 
     @Override
@@ -167,6 +170,14 @@ public class AskblessingActivity extends AppCompatActivity {
                 button_upload.setVisibility(View.VISIBLE);
 //                button_camera.setVisibility(View.VISIBLE);
                 gambar_upload.setVisibility(View.VISIBLE);
+
+
+
+                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE).edit();
+                editor.putString("access token", (AccessToken.getCurrentAccessToken().getUserId()));
+                editor.commit();
+
+
 
 
             }
@@ -415,6 +426,13 @@ public class AskblessingActivity extends AppCompatActivity {
 
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost request = new HttpPost(url);
+//
+//                ContentValues values=new ContentValues();
+//
+//                values.put("msg",info);
+//                values.put("fb_id",fb_id);
+//                values.put("img",byteArray1);
+
                 List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
                 postParameters.add(new BasicNameValuePair("msg", info));
                 postParameters.add(new BasicNameValuePair("fb_id", fb_id));
