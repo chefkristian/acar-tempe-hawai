@@ -116,8 +116,6 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
 
                 SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
                 String fb_id= prefs.getString("access token", ("AccessToken.getCurrentAccessToken().getUserId()"));
-
-
                 String restoredText = String.valueOf(fb_id);
 
                 String share = et_sharing.getEditableText().toString();
@@ -127,7 +125,6 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
                         GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
 
-//                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
 
 
                 HttpClient httpClient = new DefaultHttpClient();

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -33,10 +34,20 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
+        String url = data.getString("subtitle");
+        Log.d("url to open",url);
+
         if (from.startsWith("/topics/")) {
             // message received from some topic.
         } else {
             // normal downstream message.
+//            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.putExtra("url",url);
+//            intent.putExtra("gcm",message);
+//            startActivity(intent);
         }
 
         // [START_EXCLUDE]
@@ -51,7 +62,7 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+        sendNotification(message,url);
         // [END_EXCLUDE]
     }
     // [END receive_message]
@@ -61,16 +72,25 @@ public class MyGcmListenerService extends GcmListenerService {
      *
      * @param message GCM message received.
      */
-    private void sendNotification(String message) {
+    private void sendNotification(String message,String url) {
+
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("url",url);
+        intent.putExtra("gcm",message);
+
+//        if(!url.equals("")) {
+//            intent = new Intent(this, WebViewPh.class);
+//            intent.putExtra("url",url);
+//        }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("GCM Message")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Twin Heart App")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
