@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             lat = Double.toString(latitude);
             Log.d("latitude",lat);
         }
+
         new MyAsyncTask(lat,lng).execute("http://twinheart.stage.city/twinheartapi/saveDevice?lat=" + lat + "&lng=" + lng);
 
     }
