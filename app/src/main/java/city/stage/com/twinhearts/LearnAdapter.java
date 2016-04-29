@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -50,11 +51,17 @@ public class LearnAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view , ViewGroup viewGroup) {
+
+
 
         JadwalPHResult jadwal;
 
         view = mInflater.inflate(R.layout.learn_ph_jadwal, null);
+
+        LinearLayout ll = (LinearLayout) view.findViewById(R.id.line11);
+
+
 
 
         jadwal = new JadwalPHResult();
@@ -63,9 +70,9 @@ public class LearnAdapter extends BaseAdapter {
 //        jadwal.lokasi_kursus = (TextView)view.findViewById(R.id.lokasi_course);
         jadwal.jenis_kursus = (TextView) view.findViewById(R.id.jenis_course);
         jadwal.desc_course = (TextView) view.findViewById(R.id.desc_course);
-        jadwal.lokasi_course = (TextView) view.findViewById(R.id.lokasi_course);
-        jadwal.jadwal_course = (TextView) view.findViewById(R.id.jadwal_course);
-        jadwal.price_course = (TextView) view.findViewById(R.id.price_course);
+//        jadwal.lokasi_course = (TextView) view.findViewById(R.id.lokasi_course);
+//        jadwal.jadwal_course = (TextView) view.findViewById(R.id.jadwal_course);
+//        jadwal.price_course = (TextView) view.findViewById(R.id.price_course);
         jadwal.tvHeader = (TextView) view.findViewById(R.id.tvHeader);
 
         JSONObject jsonObject = (JSONObject) getItem(i);
@@ -79,33 +86,49 @@ public class LearnAdapter extends BaseAdapter {
         jadwal.tvHeader.setText(jsonObject.optString("courses"));
 
 
+//            untuk munculin headers di item pertama tiap array mulai
+        if (i == sizeFirstArr || i == 0)
+            jadwal.tvHeader.setVisibility(View.VISIBLE);
 
-//        String lokasi_kursus = "";
+        else {
+            jadwal.tvHeader.setVisibility(View.GONE);
+        }
+//            akhir munculin headers
+
 
         try {
             JSONArray kursus_array = jsonObject.optJSONArray("kursus_array");
+            if(kursus_array != null)
+//            Log.d("hahahah",Integer.toString(kursus_array.length()));
             for (int j = 0; j < kursus_array.length(); j++) {
 
-//            untuk munculin headers di item pertama tiap array mulai
-                if (i == sizeFirstArr || i == 0)
-                    jadwal.tvHeader.setVisibility(View.VISIBLE);
-
-                else {
-                    jadwal.tvHeader.setVisibility(View.GONE);
-                }
-
-//            akhir munculin headers
                 try {
-                    JSONObject kursus_detail = kursus_array.getJSONObject(0);
+
+//                    View v1 = view;
+
+                    View v1 = mInflater.inflate(R.layout.activity_detail_learn_ph, null);
+
+                    TextView lokasi_course = (TextView)v1.findViewById(R.id.lokasi_course);
+
+                    TextView jadwal_course = (TextView)v1.findViewById(R.id.jadwal_course);
+                    TextView price_course = (TextView)v1.findViewById(R.id.price_course);
+
+                    JSONObject kursus_detail = kursus_array.getJSONObject(j);
+                    Log.d("item no"+j,kursus_detail.toString());
                     String lokasi_kursus = kursus_detail.optString("jdwl_lokasi");
                     String jadwal_kursus = kursus_detail.optString("jdwl_date_start");
                     String harga_course = kursus_detail.optString("jdwl_price");
-//                if (lokasi_kursus.equals("")){
-//                    break;
-//                }
-                    jadwal.lokasi_course.setText(lokasi_kursus);
-                    jadwal.jadwal_course.setText(jadwal_kursus);
-                    jadwal.price_course.setText(harga_course);
+
+
+                    lokasi_course.setText(lokasi_kursus);
+                    jadwal_course.setText(jadwal_kursus);
+                    price_course.setText(harga_course);
+
+
+                    ll.addView(v1);
+//                    jadwal.lokasi_course.setText(lokasi_kursus);
+//                    jadwal.jadwal_course.setText(jadwal_kursus);
+//                    jadwal.price_course.setText(harga_course);
 //                Log.d("lokasi_kursus", lokasi_kursus);
                 } catch (JSONException e) {
                     e.printStackTrace();

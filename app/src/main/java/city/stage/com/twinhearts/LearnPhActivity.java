@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -111,48 +112,55 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
             desc_course.setVisibility(TextView.GONE);
         }
 
-        TextView lokasi_couses = (TextView)view.findViewById(R.id.lokasi_course);
-        if (lokasi_couses.getVisibility()==TextView.GONE){
-            lokasi_couses.setVisibility(TextView.VISIBLE);
+        LinearLayout ll = (LinearLayout)view.findViewById(R.id.line11);
+        if (ll.getVisibility()==View.GONE){
+            ll.setVisibility(View.VISIBLE);
         } else {
-            lokasi_couses.setVisibility(TextView.GONE);
+            ll.setVisibility(View.GONE);
         }
 
-        TextView lokasi = (TextView)view.findViewById(R.id.tv_lokasi);
-        if (lokasi.getVisibility()==TextView.GONE){
-            lokasi.setVisibility(TextView.VISIBLE);
-        } else {
-            lokasi.setVisibility(TextView.GONE);
-        }
+//        TextView lokasi_couses = (TextView)view.findViewById(R.id.lokasi_course);
+//        if (lokasi_couses.getVisibility()==TextView.GONE){
+//            lokasi_couses.setVisibility(TextView.VISIBLE);
+//        } else {
+//            lokasi_couses.setVisibility(TextView.GONE);
+//        }
+//
+//        TextView lokasi = (TextView)view.findViewById(R.id.tv_lokasi);
+//        if (lokasi.getVisibility()==TextView.GONE){
+//            lokasi.setVisibility(TextView.VISIBLE);
+//        } else {
+//            lokasi.setVisibility(TextView.GONE);
+//        }
 
-        TextView jadwal_course = (TextView)view.findViewById(R.id.jadwal_course);
-        if (jadwal_course.getVisibility()==TextView.GONE){
-            jadwal_course.setVisibility(TextView.VISIBLE);
-        } else {
-            jadwal_course.setVisibility(TextView.GONE);
-        }
+//        TextView jadwal_course = (TextView)view.findViewById(R.id.jadwal_course);
+//        if (jadwal_course.getVisibility()==TextView.GONE){
+//            jadwal_course.setVisibility(TextView.VISIBLE);
+//        } else {
+//            jadwal_course.setVisibility(TextView.GONE);
+//        }
+//
+//        TextView jadwal = (TextView)view.findViewById(R.id.tv_jadwal);
+//        if (jadwal.getVisibility()==TextView.GONE){
+//            jadwal.setVisibility(TextView.VISIBLE);
+//        } else {
+//            jadwal.setVisibility(TextView.GONE);
+//        }
 
-        TextView jadwal = (TextView)view.findViewById(R.id.tv_jadwal);
-        if (jadwal.getVisibility()==TextView.GONE){
-            jadwal.setVisibility(TextView.VISIBLE);
-        } else {
-            jadwal.setVisibility(TextView.GONE);
-        }
+//        TextView harga_course = (TextView)view.findViewById(R.id.price_course);
+//        if (harga_course.getVisibility()==TextView.GONE){
+//            harga_course.setVisibility(TextView.VISIBLE);
+//        } else {
+//            harga_course.setVisibility(TextView.GONE);
+//        }
+//
+//        TextView harga = (TextView)view.findViewById(R.id.tv_harga);
+//        if (harga.getVisibility()==TextView.GONE){
+//            harga.setVisibility(TextView.VISIBLE);
+//        } else {
+//            harga.setVisibility(TextView.GONE);
+//        }
 
-        TextView harga_course = (TextView)view.findViewById(R.id.price_course);
-        if (harga_course.getVisibility()==TextView.GONE){
-            harga_course.setVisibility(TextView.VISIBLE);
-        } else {
-            harga_course.setVisibility(TextView.GONE);
-        }
-
-        TextView harga = (TextView)view.findViewById(R.id.tv_harga);
-        if (harga.getVisibility()==TextView.GONE){
-            harga.setVisibility(TextView.VISIBLE);
-        } else {
-            harga.setVisibility(TextView.GONE);
-        }
-//        JSONObject jsonObject = (JSONObject) mJSONAdapter.getItem(i);
 
 
 
