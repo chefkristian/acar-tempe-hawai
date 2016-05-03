@@ -41,6 +41,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -53,6 +54,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     TextView meditate_now,meditasi_BI,ask_blessing,group_meditasi,learn_ph;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Double latitude;
     public static Double longitude;
     String lng,lat;
-    String MY_PREFS_NAME;
+    String MY_PREFS_NAME,MY_PREFS_NAME_LOCATION;
 
     String url,gcmtext;
 
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-//        mulai sini
+//        mulai sini get location
 
         Intent intent = new Intent(MainActivity.this, GPSTrackerActivity.class);
         startActivityForResult(intent, 1);
@@ -155,6 +157,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Double latitude = extras.getDouble("Latitude");
             lat = Double.toString(latitude);
             Log.d("latitude",lat);
+
+            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME_LOCATION, MODE_PRIVATE).edit();
+            editor.putString("latitude", lat);
+            editor.putString("longitude", lng);
+            editor.commit();
         }
 
         new MyAsyncTask(lat,lng).execute("http://twinheart.stage.city/twinheartapi/saveDevice?lat=" + lat + "&lng=" + lng);
@@ -185,28 +192,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onClick(View view) {
@@ -311,6 +318,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result="got it";
                 Log.d("halo6a", "haloooo6a" + type);
 
+
+
+
+
 //                buat Setting awal
                 HttpClient httpclient = new DefaultHttpClient();
 
@@ -340,6 +351,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         Log.d("Setting text", settingText);
 
+
+//
 
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE).edit();
                         editor.putString("Setting",settingText);

@@ -61,11 +61,12 @@
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:text="Open Location on Google Map"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="10dp"
+       android:textColor="#000"
+        android:background="@drawable/button_shape2"
         android:id="@+id/button_map"
         />
 

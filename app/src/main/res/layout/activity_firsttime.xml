@@ -1,45 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/meditasibg2"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="First Time do this Meditation?"
+        android:textColor="#FFF"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/text1"
         android:gravity="center_horizontal"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:textColor="#FFF"
+        android:id="@+id/text2"
         android:text="Apakah melakukan meditasi ini yang pertama kalinya ?"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/text1"
         android:gravity="center_horizontal"/>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/gambar1"
+        android:src="@drawable/orangmeditasi"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         <Button
             android:layout_width="100dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+
             android:id="@+id/button_ya"
             android:text="YES"></Button>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
         <Button
             android:layout_width="100dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:layout_centerHorizontal="true"
+            android:layout_height="40dp"
             android:id="@+id/button_tidak"
             android:text="NO"></Button>
-
+        </RelativeLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

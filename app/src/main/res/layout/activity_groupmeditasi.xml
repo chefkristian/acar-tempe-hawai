@@ -55,20 +55,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                >
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="Come to Our Center"
-                android:id="@+id/button_come"/>
+                android:background="@drawable/button_shape2"
+                android:textColor="#000"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/button_come"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+            </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                >
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
                 android:text="Streaming"
+                android:textColor="#000"
+                android:background="@drawable/button_shape2"
                 android:id="@+id/button_streaming"/>
-
+            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>

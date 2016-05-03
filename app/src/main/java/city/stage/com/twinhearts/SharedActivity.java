@@ -73,6 +73,9 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
 
             new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveFeedback");
 
+            Intent i = new Intent(this,MainActivity.class);
+            startActivity(i);
+
                 //get message from message box
 //                String  share = et_sharing.getText().toString();
 //

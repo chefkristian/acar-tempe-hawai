@@ -2,15 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/meditasibg1"
+        android:scaleType="fitXY"/>
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="TWIN HEARTS MEDITATION"
+        android:textColor="#000"
         android:id="@+id/twinheart"
        android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center_horizontal"
@@ -20,15 +27,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Grand Master Choa Kok Sui"
+        android:textColor="#000"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_below="@+id/twinheart"
         android:gravity="center_horizontal"
         android:id="@+id/gmcks" />
 <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="250dp"
-    android:layout_below="@+id/gmcks"
-    android:id="@+id/gbr_meditasi"/>
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:scaleType="fitCenter"
+    android:src="@drawable/orangmeditasi"
+    android:id="@+id/gbr_meditasi"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true" />
 
 
 
@@ -38,6 +49,7 @@
         android:id="@+id/seekBar"
         android:layout_marginBottom="50dp"
        android:layout_below="@+id/gbr_meditasi"
+        android:paddingTop="20dp"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -45,35 +57,43 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
+        android:textColor="#000"
         android:id="@+id/start_time"
-        android:layout_above="@+id/seekBar"
+        android:layout_above="@+id/linearLayout"
         android:layout_alignParentLeft="true"
-        />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="27dp"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
+        android:textColor="#000"
         android:id="@+id/end_time"
-        android:layout_above="@+id/seekBar"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignTop="@+id/start_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"/>
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_below="@+id/seekBar"
+    android:paddingTop="20dp"
     android:gravity="center_horizontal"
 
-    >
+    android:id="@+id/linearLayout">
 
 
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Pause"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_pause"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
@@ -83,7 +103,8 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/button_shape"
         android:text="Play"
         android:id="@+id/button_play"
         android:layout_marginBottom="20dp"

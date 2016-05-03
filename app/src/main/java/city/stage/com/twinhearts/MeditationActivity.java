@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -50,7 +51,7 @@ public class MeditationActivity extends AppCompatActivity {
             mediaPlayer = MediaPlayer.create(this, R.raw.twin_hearts_eng);
         }
         if (bahasa.contentEquals("indo")){
-            mediaPlayer = MediaPlayer.create(this,R.raw.like);
+            mediaPlayer = MediaPlayer.create(this,R.raw.twin_hearts_indo);
         }
 
 
@@ -103,6 +104,8 @@ public class MeditationActivity extends AppCompatActivity {
                 button_play.setEnabled(false);
 
             }
+
+
 
 
 //                if (bahasa.contentEquals("indo")) {

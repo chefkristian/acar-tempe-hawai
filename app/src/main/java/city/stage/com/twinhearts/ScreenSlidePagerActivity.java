@@ -15,6 +15,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
      * The pager adapter, which provides the pages to the view pager widget.
      */
     private PagerAdapter mPagerAdapter;
-    Button prev_button, next_button;
+    ImageView prev_button, next_button;
     String bahasa;
 
     @Override
@@ -126,8 +127,8 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
 
 
-        next_button = (Button) findViewById(R.id.next_button);
-        prev_button = (Button) findViewById(R.id.prev_button);
+        next_button = (ImageView) findViewById(R.id.next_button);
+        prev_button = (ImageView) findViewById(R.id.prev_button);
 
 
 

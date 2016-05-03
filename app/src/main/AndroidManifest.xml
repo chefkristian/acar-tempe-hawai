@@ -44,6 +44,7 @@
         <activity android:name=".LearnPhActivity"></activity>
         <activity android:name=".GPSTrackerActivity"></activity>
         <activity android:name=".WebViewPh"></activity>
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

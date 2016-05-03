@@ -67,7 +67,7 @@ public class AskblessingActivity extends AppCompatActivity {
 
     TextView nama_profile;
     Button button_submit;
-    ImageView button_upload, gambar_upload, button_camera;
+    ImageView button_upload, gambar_upload;
     LoginButton button_facebook;
     private CallbackManager callbackManager;
     ProfilePictureView profilePictureView;

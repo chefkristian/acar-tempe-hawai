@@ -104,7 +104,7 @@ public class LearnAdapter extends BaseAdapter {
 
                 try {
 
-//                    View v1 = view;
+
 
                     View v1 = mInflater.inflate(R.layout.activity_detail_learn_ph, null);
 
@@ -124,8 +124,10 @@ public class LearnAdapter extends BaseAdapter {
                     jadwal_course.setText(jadwal_kursus);
                     price_course.setText(harga_course);
 
-
+//tambahah childview di parent view
                     ll.addView(v1);
+
+
 //                    jadwal.lokasi_course.setText(lokasi_kursus);
 //                    jadwal.jadwal_course.setText(jadwal_kursus);
 //                    jadwal.price_course.setText(harga_course);
@@ -162,14 +164,6 @@ public class LearnAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-//    public void masukin2(JSONObject json) {
-//        mJsonObject = json;
-//        mJsonArray = json.optJSONObject("courses").optJSONArray("other");
-//
-//
-//        //harus ada!!
-//        notifyDataSetChanged();
-//    }
 
     private static class JadwalPHResult {
         public TextView tipe_kursus;
