@@ -263,7 +263,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public  MyAsyncTask(String l1,String l2){
             lat = l1;
             lng = l2;
-
         }
 
         @Override
