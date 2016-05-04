@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
@@ -16,9 +18,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,12 +49,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.FileNameMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -69,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String MY_PREFS_NAME,MY_PREFS_NAME_LOCATION;
 
     String url,gcmtext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -276,9 +287,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
                 Log.d("halo1c","haloooo1c"+token);
 
-
-
-
 //
 ////                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
 //                String fb_name = Profile.getCurrentProfile().toString();
@@ -322,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
 //                buat Setting awal
                 HttpClient httpclient = new DefaultHttpClient();
 
@@ -352,9 +361,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d("Setting text", settingText);
 
 
-//
+                        JSONObject setting_obj = new JSONObject(settingText);
+
+                        JSONArray settingResults = setting_obj.optJSONArray("results");
+                        int sizeFirstArr = settingResults.length();
 
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE).edit();
+
+                        for (int x= 0; x < sizeFirstArr; x++){
+                            JSONObject settingObject = settingResults.getJSONObject(x);
+                            if(settingObject.optString("set_id").equals("App_Version_Android")){
+                                Log.d("Versi sekarang", settingObject.optString("set_value"));
+                                editor.putString("Versi", settingObject.optString("set_value"));
+
+
+
+                            }
+                        }
+//
+
+
                         editor.putString("Setting",settingText);
                         editor.commit();
                     }
@@ -386,6 +412,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         protected void onPostExecute(String result){
+
+            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+            String CurrentString = prefs.getString("Versi", null);
+
+            Log.d("qwert",CurrentString);
+//            String CurrentString = settingObject.optString("set_value");
+            String[] separated = CurrentString.split(";");
+
+            Log.d("Versi Number", separated[0]);
+            Log.d("Apa harus update", separated[1]);
+
+            Integer versi = Integer.parseInt(separated[0]);
+            Integer forceUpdate = Integer.parseInt(separated[1]);
+
+            int versionCode = 0;
+            try {
+                versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+
+
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            if(versi>versionCode){
+                //harus diupdate
+                if(forceUpdate == 1){
+                    //harus di force, kalu tidak di close
+                    initiatePopupWindow();
+
+                }
+                else{
+                    //popup biasa bisa di cancel
+                    initiatePopupWindownoForce();
+                }
+            }
+
 //            pb.setVisibility(View.GONE);
 //            et_info.setText("");
 //            gambar_upload.setImageDrawable(null);
@@ -423,4 +485,89 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return sb.toString();
     }
 //    tambahan buat setting akhir
+
+
+
+    private void initiatePopupWindow() {
+        final PopupWindow pwindo;
+        try {
+// We need to get the instance of the LayoutInflater
+            LayoutInflater inflater = (LayoutInflater) MainActivity.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.activity_popup_windows,
+                    (ViewGroup) findViewById(R.id.popup_element));
+//           pwindo = new PopupWindow(layout, 800, 300, true);
+            pwindo = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
+            pwindo.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+           Button button_close = (Button) layout.findViewById(R.id.button_close);
+           Button button_update = (Button)layout.findViewById(R.id.button_update);
+
+            button_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
+                    pwindo.dismiss();
+
+                }
+            });
+
+            button_update.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pwindo.dismiss();
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                            ("market://details?id=com.today.goodfortune&hl=en")));
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initiatePopupWindownoForce() {
+        final PopupWindow pwindo2;
+
+        try {
+// We need to get the instance of the LayoutInflater
+            LayoutInflater inflater = (LayoutInflater) MainActivity.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.activity_popwindow2,
+                    (ViewGroup) findViewById(R.id.popup_element_noforce));
+            pwindo2 = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
+            pwindo2.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
+
+            Button button_close_noforce = (Button) layout.findViewById(R.id.button_close_noforce);
+            Button button_update = (Button)layout.findViewById(R.id.button_update);
+
+            button_close_noforce.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   pwindo2.dismiss();
+                }
+            });
+
+            button_update.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pwindo2.dismiss();
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                            ("market://details?id=com.today.goodfortune&hl=en")));
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
+
+
+

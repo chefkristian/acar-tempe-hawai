@@ -17,6 +17,15 @@
         android:src="@drawable/learn_ph2"
         android:scaleType="fitXY"/>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleSmall"
+        android:id="@+id/progresBar"
+        android:layout_gravity="center_horizontal"
+        android:progressDrawable="@drawable/circular_progresbar"/>
+
+
     <!--<TextView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->

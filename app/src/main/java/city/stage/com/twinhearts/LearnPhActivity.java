@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import java.util.Iterator;
 public class LearnPhActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView list_learn_ph, list_learn_ph2;
     LearnAdapter mJSONAdapter, mJSONAdapter2;
+    ProgressBar progresBar;
 
 
     @Override
@@ -36,6 +38,8 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
 
 
         list_learn_ph = (ListView)findViewById(R.id.list_learn_ph);
+        progresBar = (ProgressBar)findViewById(R.id.progresBar);
+
 
 //        list_learn_ph2 = (ListView)findViewById(R.id.list_learn_ph2);
 
@@ -59,6 +63,7 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
 
 //
                         mJSONAdapter.masukin(jsonObject);
+                        progresBar.setVisibility(View.GONE);
 //                        mJSONAdapter2.masukin2(jsonObject);
 
 

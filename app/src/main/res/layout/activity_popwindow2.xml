@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="#FFF"
     android:layout_width="match_parent"
-    android:id="@+id/popup_element"
-    android:background="#fff"
+    android:id="@+id/popup_element_noforce"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:text="New version is available, please update" />
 
     <LinearLayout
@@ -29,12 +29,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"
-                android:text="Close"
-                android:id="@+id/button_close" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No, thanks"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/button_close_noforce" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -42,12 +43,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"
-                android:text="Update"
-                android:id="@+id/button_update" />
+        <Button
+            android:layout_width="wrap_content"
+           android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/button_update" />
         </RelativeLayout>
     </LinearLayout>
 
