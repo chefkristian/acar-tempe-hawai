@@ -605,7 +605,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
                         (url)));
                 dialog.dismiss();
-              
+
             }
         });
 

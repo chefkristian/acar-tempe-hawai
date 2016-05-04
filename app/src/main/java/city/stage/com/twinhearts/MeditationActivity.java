@@ -1,6 +1,7 @@
 package city.stage.com.twinhearts;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,7 +29,7 @@ public class MeditationActivity extends AppCompatActivity {
     private double finalTime = 100;
     private Handler myHandler = new Handler();
     public static int oneTimeOnly = 0;
-    String bahasa;
+    String bahasa, MY_PREFS_NAME_LOCATION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,46 +104,19 @@ public class MeditationActivity extends AppCompatActivity {
                 button_pause.setEnabled(true);
                 button_play.setEnabled(false);
 
+                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME_LOCATION, MODE_PRIVATE);
+                String LongitudePlay = prefs.getString("longitude", null);
+                Log.d("oooooo",LongitudePlay);
+                String LatitudePlay = prefs.getString("latitude",null);
+                Log.d("pppppp",LatitudePlay);
+
             }
 
 
 
 
-//                if (bahasa.contentEquals("indo")) {
-//                    mediaPlayer2.start();
-//                    finalTime = mediaPlayer2.getDuration();
-//                    startTime = mediaPlayer2.getCurrentPosition();
-//
-//                    if (oneTimeOnly == 0) {
-//                        seekBar2.setMax(mediaPlayer2.getDuration());
-//                        oneTimeOnly = 1;
-//                    }
-//
-//                    end_time.setText(String.format("%d min, %d sec",
-//                                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-//                                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-//                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) finalTime)))
-//                    );
-//
-//                    start_time.setText(String.format("%d min, %d sec",
-//                                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-//                                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-//                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) startTime)))
-//                    );
-//                }
 
-//
-//                seekBar2.setProgress((int) startTime);
-//                myHandler.postDelayed(UpdateSongTime, 100);
-//
-//                start_time.setVisibility(View.VISIBLE);
-//                end_time.setVisibility(View.VISIBLE);
-//
-//
-//                button_pause.setEnabled(true);
-//                button_play.setEnabled(false);
-//
-//            }
+
 
         });
 
