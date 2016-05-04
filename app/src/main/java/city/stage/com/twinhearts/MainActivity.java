@@ -1,7 +1,9 @@
 package city.stage.com.twinhearts;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         meditasi_BI=(TextView)findViewById(R.id.meditasi_BI);
         ask_blessing=(TextView)findViewById(R.id.ask_blessing);
         group_meditasi=(TextView)findViewById(R.id.group_meditasi);
+        group_meditasi.setVisibility(View.GONE);
         learn_ph=(TextView)findViewById(R.id.learn_ph);
 
         meditate_now.setOnClickListener(this);
@@ -373,8 +376,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if(settingObject.optString("set_id").equals("App_Version_Android")){
                                 Log.d("Versi sekarang", settingObject.optString("set_value"));
                                 editor.putString("Versi", settingObject.optString("set_value"));
-
-
+                            }
+                            else if (settingObject.optString("set_id").equals("App_URL_Android")){
+                                Log.d("url play store",settingObject.optString("set_value"));
+                                editor.putString("url_playstore", settingObject.optString("set_value"));
 
                             }
                         }
@@ -416,6 +421,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
             String CurrentString = prefs.getString("Versi", null);
 
+            String urlUpdate = prefs.getString("url_playstore",null);
+            Log.d("zxcvb",urlUpdate);
+
             Log.d("qwert",CurrentString);
 //            String CurrentString = settingObject.optString("set_value");
             String[] separated = CurrentString.split(";");
@@ -448,12 +456,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-//            pb.setVisibility(View.GONE);
-//            et_info.setText("");
-//            gambar_upload.setImageDrawable(null);
-//            Toast.makeText(MainActivity.this, "command sent", Toast.LENGTH_LONG).show();
+
         }
-//
+
     }
 
 
@@ -489,80 +494,131 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initiatePopupWindow() {
-        final PopupWindow pwindo;
-        try {
-// We need to get the instance of the LayoutInflater
-            LayoutInflater inflater = (LayoutInflater) MainActivity.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.activity_popup_windows,
-                    (ViewGroup) findViewById(R.id.popup_element));
-//           pwindo = new PopupWindow(layout, 800, 300, true);
-            pwindo = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
-            pwindo.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
+//        final PopupWindow pwindo;
+//        try {
+//// We need to get the instance of the LayoutInflater
+//            LayoutInflater inflater = (LayoutInflater) MainActivity.this
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            View layout = inflater.inflate(R.layout.activity_popup_windows,
+//                    (ViewGroup) findViewById(R.id.popup_element));
+////           pwindo = new PopupWindow(layout, 800, 300, true);
+//            pwindo = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
+//            pwindo.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
+//
+//           Button button_close = (Button) layout.findViewById(R.id.button_close);
+//           Button button_update = (Button)layout.findViewById(R.id.button_update);
+//
+//            button_close.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    android.os.Process.killProcess(android.os.Process.myPid());
+//                    System.exit(1);
+//                    pwindo.dismiss();
+//
+//                }
+//            });
+//
+//            button_update.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    pwindo.dismiss();
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+//                            ("market://details?id=com.today.goodfortune&hl=en")));
+//
+//                }
+//            });
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        final String url = prefs.getString("url_playstore",null);
 
-           Button button_close = (Button) layout.findViewById(R.id.button_close);
-           Button button_update = (Button)layout.findViewById(R.id.button_update);
 
-            button_close.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                    System.exit(1);
-                    pwindo.dismiss();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("A new Update is Available");
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                        (url)));
+                dialog.dismiss();
+                finish();
+            }
+        });
 
-                }
-            });
+        builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            }
+        });
 
-            button_update.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pwindo.dismiss();
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
-                            ("market://details?id=com.today.goodfortune&hl=en")));
-                }
-            });
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        builder.setCancelable(false);
+        builder.show();
     }
 
     private void initiatePopupWindownoForce() {
-        final PopupWindow pwindo2;
+//        final PopupWindow pwindo2;
+//
+//        try {
+//// We need to get the instance of the LayoutInflater
+//            LayoutInflater inflater = (LayoutInflater) MainActivity.this
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            View layout = inflater.inflate(R.layout.activity_popwindow2,
+//                    (ViewGroup) findViewById(R.id.popup_element_noforce));
+//            pwindo2 = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
+//            pwindo2.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
+//
+//            Button button_close_noforce = (Button) layout.findViewById(R.id.button_close_noforce);
+//            Button button_update = (Button)layout.findViewById(R.id.button_update);
+//
+//            button_close_noforce.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                   pwindo2.dismiss();
+//                }
+//            });
+//
+//            button_update.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    pwindo2.dismiss();
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+//                            ("market://details?id=com.today.goodfortune&hl=en")));
+//                }
+//            });
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        final String url = prefs.getString("url_playstore",null);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("A new Update is Available");
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                        (url)));
+                dialog.dismiss();
+              
+            }
+        });
 
-        try {
-// We need to get the instance of the LayoutInflater
-            LayoutInflater inflater = (LayoutInflater) MainActivity.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.activity_popwindow2,
-                    (ViewGroup) findViewById(R.id.popup_element_noforce));
-            pwindo2 = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
-            pwindo2.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
+        builder.setNegativeButton("No,thanks", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
 
-            Button button_close_noforce = (Button) layout.findViewById(R.id.button_close_noforce);
-            Button button_update = (Button)layout.findViewById(R.id.button_update);
+            }
+        });
 
-            button_close_noforce.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                   pwindo2.dismiss();
-                }
-            });
-
-            button_update.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pwindo2.dismiss();
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
-                            ("market://details?id=com.today.goodfortune&hl=en")));
-                }
-            });
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        builder.setCancelable(false);
+        builder.show();
     }
 
 
