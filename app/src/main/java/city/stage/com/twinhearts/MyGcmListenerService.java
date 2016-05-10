@@ -75,6 +75,8 @@ public class MyGcmListenerService extends GcmListenerService {
     private void sendNotification(String message,String url) {
 
         Intent intent = new Intent(this, MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("url",url);
         intent.putExtra("gcm",message);
 

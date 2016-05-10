@@ -73,8 +73,6 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
 
             new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveFeedback");
 
-            Intent i = new Intent(this,MainActivity.class);
-            startActivity(i);
 
                 //get message from message box
 //                String  share = et_sharing.getText().toString();
@@ -166,6 +164,10 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
             et_sharing.setText("");
 //            gambar_upload.setImageDrawable(null);
             Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(SharedActivity.this,MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+
         }
     }
 

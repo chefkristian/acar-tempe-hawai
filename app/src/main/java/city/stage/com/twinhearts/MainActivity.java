@@ -67,7 +67,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView meditate_now,meditasi_BI,ask_blessing,group_meditasi,learn_ph;
+    TextView meditate_now,meditasi_BI,ask_blessing,group_meditasi,learn_ph,inbox;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
@@ -93,12 +93,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         group_meditasi=(TextView)findViewById(R.id.group_meditasi);
         group_meditasi.setVisibility(View.GONE);
         learn_ph=(TextView)findViewById(R.id.learn_ph);
+        inbox = (TextView)findViewById(R.id.inbox);
 
         meditate_now.setOnClickListener(this);
         meditasi_BI.setOnClickListener(this);
         ask_blessing.setOnClickListener(this);
         group_meditasi.setOnClickListener(this);
         learn_ph.setOnClickListener(this);
+        inbox.setOnClickListener(this);
 
         Log.d("Atas", "atas24");
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -125,18 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-//        mulai sini get location
-
-        Intent intent = new Intent(MainActivity.this, GPSTrackerActivity.class);
-        startActivityForResult(intent, 1);
-
-        Log.d("Atas", "atas21");
-
-
-        Log.d("Atas", "atas22");
-
-//          sampai sini
-
         try {
             url = getIntent().getExtras().getString("url");
             if (!url.equals("")) {
@@ -151,19 +141,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try{
             gcmtext = getIntent().getExtras().getString("gcm");
             if (!gcmtext.equals("")) {
+                Intent intentInbox = new Intent(this, InboxActivity.class);
+                intentInbox.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentInbox);
+
                Toast.makeText(this,gcmtext,Toast.LENGTH_LONG).show();
             }
         }catch (Exception e){
 
         }
 
+        ////        mulai sini get location
+
+        Intent intent = new Intent( MainActivity.this, GPSTrackerActivity.class);
+        startActivityForResult(intent, 1);
+
+        Log.d("Atas", "atas21");
+
+
+        Log.d("Atas", "atas22");
+
+////          sampai sini
+
     }
 //get location
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
+        if(requestCode == 1 && data != null){
             Bundle extras = data.getExtras();
             Double longitude = extras.getDouble("Longitude");
             lng = Double.toString(longitude);
@@ -253,6 +258,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent inten = new Intent(this, LearnPhActivity.class);
             startActivity(inten);
         }
+        if (view.getId()==R.id.inbox){
+            Intent intent = new Intent(this, InboxActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -289,8 +298,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
                 Log.d("halo1c","haloooo1c"+token);
 
-//
-////                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
 //                String fb_name = Profile.getCurrentProfile().toString();
                 String type = "android";
 

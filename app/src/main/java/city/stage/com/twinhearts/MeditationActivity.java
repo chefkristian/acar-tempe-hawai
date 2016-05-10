@@ -54,7 +54,7 @@ public class MeditationActivity extends AppCompatActivity {
     private double finalTime = 100;
     private Handler myHandler = new Handler();
     public static int oneTimeOnly = 0;
-    String bahasa, MY_PREFS_NAME_LOCATION;
+    String bahasa, MY_PREFS_NAME_LOCATION, MY_PREFS_NAME;
     String LongitudePlay,LatitudePlay;
 
     @Override
@@ -136,13 +136,9 @@ public class MeditationActivity extends AppCompatActivity {
                  LatitudePlay = prefs.getString("latitude",null);
                 Log.d("pppppp",LatitudePlay);
 
-//                new MyAsyncTask(LatitudePlay,LongitudePlay).execute("http://twinheart.stage.city/twinheartapi/saveDevice?lat=" + LatitudePlay + "&lng=" + LongitudePlay);
+                new MyAsyncTask(LatitudePlay,LongitudePlay).execute("http://twinheart.stage.city/twinheartapi/savePlay?lat=" + LatitudePlay + "&lng=" + LongitudePlay);
 
             }
-
-
-
-
 
 
 
@@ -340,27 +336,27 @@ public class MeditationActivity extends AppCompatActivity {
 //            postData(params[0]);
 //            return null;
             BufferedReader inBuffer = null;
-            String url = "http://twinheart.stage.city/twinheartapi/saveDevice?lat="+LatitudePlay+"&lng="+LongitudePlay;
+            String url = "http://twinheart.stage.city/twinheartapi/savePlay?lat="+LatitudePlay+"&lng="+LongitudePlay;
             String result = "fail";
             Log.d("halo1a","haloooo1a " + url);
             try {
 
-//                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-//                String fb_id= prefs.getString("access token", ("AccessToken.getCurrentAccessToken().getUserId()"));
-//                String restoredText = String.valueOf(fb_id);
-//                Log.d("halo1b","haloooo1b"+restoredText);
+                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                String fb_id= prefs.getString("access token", ("AccessToken.getCurrentAccessToken().getUserId()"));
+                String restoredText = String.valueOf(fb_id);
+                Log.d("halo1b","haloooo1b"+restoredText);
 
 
 
-//                InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
-//                String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
-//                        GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-//                Log.d("halo1c","haloooo1c"+token);
+                InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
+                String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
+                        GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+                Log.d("halo1c","haloooo1c"+token);
 
 //
 ////                String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
 //                String fb_name = Profile.getCurrentProfile().toString();
-//                String type = "android";
+                String type = "android";
 
 
 
@@ -371,10 +367,10 @@ public class MeditationActivity extends AppCompatActivity {
                 HttpPost request = new HttpPost(url);
 
                 List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-//                postParameters.add(new BasicNameValuePair("device_id", token));
-//                postParameters.add(new BasicNameValuePair("fb_id", restoredText));
+                postParameters.add(new BasicNameValuePair("device_id", token));
+                postParameters.add(new BasicNameValuePair("fb_id", restoredText));
 //                postParameters.add(new BasicNameValuePair("fb_name",fb_name));
-//                postParameters.add(new BasicNameValuePair("type",type));
+                postParameters.add(new BasicNameValuePair("type",type));
 
 //                Log.d("halo3", "dev id " + token);
 //                Log.d("fb_id", "fb id " + restoredText);

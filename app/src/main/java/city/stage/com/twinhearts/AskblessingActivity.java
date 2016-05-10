@@ -217,6 +217,8 @@ public class AskblessingActivity extends AppCompatActivity {
 
                 new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveBlessing");
 
+
+
 //
 //                String info = et_info.getEditableText().toString();
 //
@@ -466,6 +468,10 @@ public class AskblessingActivity extends AppCompatActivity {
             et_info.setText("");
             gambar_upload.setImageDrawable(null);
             Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
+            Intent i = new Intent (AskblessingActivity.this,MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+
         }
 //        protected void onProgressUpdate(String... progress){
 ////            pb.setProgress(progress[0]);
