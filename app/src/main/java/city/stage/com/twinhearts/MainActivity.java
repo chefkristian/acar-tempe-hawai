@@ -67,7 +67,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView meditate_now,meditasi_BI,ask_blessing,group_meditasi,learn_ph,inbox;
+    TextView meditate_now,meditasi_BI,ask_blessing,group_meditasi,learn_ph,inbox,contact_us;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         group_meditasi.setVisibility(View.GONE);
         learn_ph=(TextView)findViewById(R.id.learn_ph);
         inbox = (TextView)findViewById(R.id.inbox);
+        contact_us = (TextView)findViewById(R.id.contact_us);
 
         meditate_now.setOnClickListener(this);
         meditasi_BI.setOnClickListener(this);
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         group_meditasi.setOnClickListener(this);
         learn_ph.setOnClickListener(this);
         inbox.setOnClickListener(this);
+        contact_us.setOnClickListener(this);
 
         Log.d("Atas", "atas24");
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -262,6 +264,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, InboxActivity.class);
             startActivity(intent);
         }
+        if (view.getId()==R.id.contact_us){
+            Intent intent = new Intent(this, ContactActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -386,7 +392,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             else if (settingObject.optString("set_id").equals("App_URL_Android")){
                                 Log.d("url play store",settingObject.optString("set_value"));
                                 editor.putString("url_playstore", settingObject.optString("set_value"));
-
+                            }
+                            else if (settingObject.optString("set_id").equals("share_url")){
+                                Log.d("url_sharing",settingObject.optString("set_value"));
+                                editor.putString("url_dishare", settingObject.optString("set_value"));
                             }
                         }
 //

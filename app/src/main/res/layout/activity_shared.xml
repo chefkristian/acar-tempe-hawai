@@ -1,92 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FFFF00"
-    >
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_centerHorizontal="true"
-
-    android:layout_height="match_parent"
-    >
-
-    <TextView
-        android:layout_width="match_parent"
-      android:gravity="center_horizontal"
-        android:paddingTop="10dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:text="THANK YOU FOR DOING TWIN HEARTS MEDITATION!"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:text="TERIMA KASIH TELAH MELAKUKAN MEDITASI JANTUNG KEMBAR!"
-        android:gravity="center_horizontal"
-        android:textColor="#000000"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:text="Please spreading more light by sharing this app:"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#000000"
-        android:paddingTop="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#000000"
-        android:text="Mari kita sebarkan lebih banyak cahaya dengan berbagi app ini:"/>
-
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-       android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000"
-        android:text="Share"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_share"/>
-
+    android:layout_height="fill_parent"
+    android:background="#FFFF00">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:paddingTop="10dp"
-        android:orientation="horizontal">
-
-
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:src="@drawable/share"
-            android:scaleType="fitXY"
+            android:scaleType="fitStart"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linear_share"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:paddingTop="10dp"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="THANK YOU FOR DOING TWIN HEARTS MEDITATION!"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="TERIMA KASIH TELAH MELAKUKAN MEDITASI JANTUNG KEMBAR!"
+                android:gravity="center_horizontal"
+                android:textColor="#444444"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Please spreading more light by sharing this app:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000000"
+                android:paddingTop="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000000"
+                android:text="Mari kita sebarkan lebih banyak cahaya dengan berbagi app ini:" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:layout_margin="5dp"
+                android:text="Share this Meditation to your friend and family"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:layout_margin="5dp"
+                android:text="Bagikan meditasi ini kepada teman dan keluarga anda"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000"
+                android:text="Share"
+                android:background="@drawable/button_shape"
+                android:id="@+id/button_share" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:paddingTop="20dp"
+            android:layout_below="@+id/linear_share"
+            android:background="#FFE57F"
+            android:orientation="horizontal">
 
 
             <TextView
@@ -94,44 +119,67 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:textColor="#000000"
+                android:padding="15dp"
                 android:id="@+id/tv_share1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:gravity="center_horizontal"
-                android:text="Share your meditation experience:"/>
+                android:text="Share your meditation experience to us and we will share it to others:" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:paddingTop="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:id="@+id/tv_share2"
                 android:layout_below="@+id/tv_share1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000"
-                android:text="Bagikan pengalaman meditasi anda:"/>
+                android:text="Bagikan pengalaman meditasi anda kepada kami dan kami akan bagikan kepada yang lainnya:" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:textColor="#000000"
+                android:padding="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_below="@+id/tv_share2"
                 android:gravity="top|left"
                 android:scrollbars="vertical"
                 android:id="@+id/et_sharing"
                 android:textSize="18sp"></EditText>
 
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/progressBarStyleSmall"
+                android:id="@+id/progresBar"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/et_sharing"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:progressDrawable="@drawable/circular_progresbar"
+                android:visibility="gone"/>
+
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:text="Submit"
+                android:layout_marginTop="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000"
+                android:background="@drawable/button_shape"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:layout_below="@+id/progresBar"
+                android:id="@+id/button_submit_share" />
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
-
-
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:text="Submit"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000"
-        android:background="@drawable/button_shape"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/button_submit_share"/>
-
-</LinearLayout>
-</RelativeLayout>
 </ScrollView>

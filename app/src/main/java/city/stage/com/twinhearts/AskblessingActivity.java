@@ -39,6 +39,7 @@ import com.facebook.login.widget.ProfilePictureView;
 
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +72,7 @@ public class AskblessingActivity extends AppCompatActivity {
     LoginButton button_facebook;
     private CallbackManager callbackManager;
     ProfilePictureView profilePictureView;
-    EditText et_info;
+    EditText et_info, et_info2;
     AccessTokenTracker accessTokenTracker;
     AccessToken accessToken;
     private static int RESULT_LOAD_IMG = 1;
@@ -81,6 +82,9 @@ public class AskblessingActivity extends AppCompatActivity {
     public static String URL = "<http://twinheart.stage.city/twinheartapi/saveBlessing>";
     Bitmap bitmap;
     SharedPreferences pref;
+    private ProgressDialog progress;
+    LinearLayout linear_ask2;
+    int flag_gambar;
 
 
     @Override
@@ -91,9 +95,11 @@ public class AskblessingActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
 
+        flag_gambar = 0;
 
         setContentView(R.layout.activity_askblessing);
         et_info = (EditText) findViewById(R.id.info);
+        et_info2 = (EditText)findViewById(R.id.info2);
         nama_profile = (TextView) findViewById(R.id.nama_profile);
         button_submit = (Button) findViewById(R.id.button_submit);
         button_upload = (ImageView) findViewById(R.id.button_upload);
@@ -101,6 +107,9 @@ public class AskblessingActivity extends AppCompatActivity {
 //        button_camera = (ImageView) findViewById(R.id.button_camera);
         button_facebook = (LoginButton) findViewById(R.id.button_facebook);
         profilePictureView = (ProfilePictureView) findViewById(R.id.profil_image);
+        linear_ask2 = (LinearLayout)findViewById(R.id.linear_ask2);
+
+
         profilePictureView.setVisibility(View.GONE);
         et_info.setVisibility(View.GONE);
         nama_profile.setVisibility(View.GONE);
@@ -108,6 +117,9 @@ public class AskblessingActivity extends AppCompatActivity {
 //        button_camera.setVisibility(View.GONE);
         button_upload.setVisibility(View.GONE);
         gambar_upload.setVisibility(View.GONE);
+        linear_ask2.setVisibility(View.GONE);
+
+        progress=new ProgressDialog(this);
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
@@ -123,6 +135,7 @@ public class AskblessingActivity extends AppCompatActivity {
             button_upload.setVisibility(View.VISIBLE);
 //                button_camera.setVisibility(View.VISIBLE);
             gambar_upload.setVisibility(View.VISIBLE);
+            linear_ask2.setVisibility(View.VISIBLE);
         }
 
         accessTokenTracker = new AccessTokenTracker() {
@@ -141,6 +154,7 @@ public class AskblessingActivity extends AppCompatActivity {
 //                    button_camera.setVisibility(View.GONE);
                     gambar_upload.setVisibility(View.GONE);
                     nama_profile.setVisibility(View.GONE);
+                    linear_ask2.setVisibility(View.GONE);
 
                 } else {
 
@@ -170,6 +184,7 @@ public class AskblessingActivity extends AppCompatActivity {
                 button_upload.setVisibility(View.VISIBLE);
 //                button_camera.setVisibility(View.VISIBLE);
                 gambar_upload.setVisibility(View.VISIBLE);
+                linear_ask2.setVisibility(View.VISIBLE);
 
 
 
@@ -215,7 +230,48 @@ public class AskblessingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveBlessing");
+
+                int err = 0;
+                String errmsg = new String();
+                //if check semua form
+
+                if(flag_gambar == 0){
+                    err++;
+                    errmsg += "Please upload Image";
+//                    Toast.makeText(getApplicationContext(), "Please upload picture of the person you want to be blessed ", Toast.LENGTH_LONG).show();
+                }
+                if(et_info.getText().toString()==null || et_info.getText().toString().trim().equals("") ){
+
+                    if(err > 0)
+                    errmsg = errmsg+"\r\n";
+
+                    errmsg += "Please fill the name";
+                    err = err + 1;
+//                    Toast.makeText(getApplicationContext(), "Please fill the full name of the person you want to be blessed ", Toast.LENGTH_LONG).show();
+                }
+                if(et_info2.getText().toString() == null || et_info2.getText().toString().trim().equals("")){
+
+                    if(err > 0)
+                    errmsg += "\r\n";
+
+                    errmsg += "Please fill the goal/problem";
+                    err++;
+//                    Toast.makeText(getApplicationContext(), "Please address the goal/problem to be blessed ", Toast.LENGTH_LONG).show();
+                }
+                if(err == 0) {
+
+                    progress.setMessage("Submitting Blessing");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.setIndeterminate(true);
+                    progress.setProgress(0);
+                    progress.show();
+
+
+                    new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveBlessing");
+                }else{
+                    Toast.makeText(getApplicationContext(), errmsg, Toast.LENGTH_LONG).show();
+
+                }
 
 
 
@@ -335,7 +391,7 @@ public class AskblessingActivity extends AppCompatActivity {
                 imgView.setImageBitmap(decodeSampledBitmapFromResource(imgDecodableString,
                         150, 150));
 
-
+                flag_gambar = 1;
 //                imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
 
@@ -406,6 +462,8 @@ public class AskblessingActivity extends AppCompatActivity {
             try {
                 String info = et_info.getEditableText().toString();
 
+                String info2 = et_info2.getEditableText().toString();
+
                 String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
 
 
@@ -436,10 +494,11 @@ public class AskblessingActivity extends AppCompatActivity {
 //                values.put("img",byteArray1);
 
                 List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-                postParameters.add(new BasicNameValuePair("msg", info));
+                postParameters.add(new BasicNameValuePair("msg", info2));
+                postParameters.add(new BasicNameValuePair("name", info));
                 postParameters.add(new BasicNameValuePair("fb_id", fb_id));
                 postParameters.add(new BasicNameValuePair("img", byteArray1));
-                postParameters.add(new BasicNameValuePair("name", params[0]));
+//                postParameters.add(new BasicNameValuePair("name", params[0]));
 
                 UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(
                         postParameters);
@@ -465,9 +524,12 @@ public class AskblessingActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result){
 //            pb.setVisibility(View.GONE);
+
+            progress.dismiss();
+
             et_info.setText("");
             gambar_upload.setImageDrawable(null);
-            Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your data has been saved and will be process", Toast.LENGTH_LONG).show();
             Intent i = new Intent (AskblessingActivity.this,MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

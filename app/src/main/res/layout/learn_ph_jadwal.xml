@@ -3,97 +3,56 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingTop="10dp">
+   >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvHeader"
-        android:text="header"
-        android:background="#dedede" />
+        android:orientation="vertical" android:background="#cccccc" android:padding="10dp" android:visibility="gone" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvHeaderTextView"
+            android:text="header"
+            android:textSize="20dp"
+            android:textColor="#000"
+            />
+    </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:padding="10dp" android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:id="@+id/jenis_course"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/jenis_course" />
+
+        android:gravity="center_vertical|left"
+
+        android:textStyle="bold"
+        />
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/desc_course"
-        android:visibility="gone" />
+        android:visibility="gone" android:layout_marginTop="10dp" />
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal">-->
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:id="@+id/line11"
+            android:orientation="vertical"></LinearLayout>
+    </LinearLayout>
 
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:text="Lokasi :"-->
-    <!--android:id="@+id/tv_lokasi"-->
-    <!--android:visibility="gone" />-->
 
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="3"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/lokasi_course"-->
-    <!--android:visibility="gone" />-->
-    <!--</LinearLayout>-->
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:text="Tanggal :"-->
-    <!--android:id="@+id/tv_jadwal"-->
-    <!--android:visibility="gone" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="3"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/jadwal_course"-->
-    <!--android:visibility="gone" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:text="Harga :"-->
-    <!--android:id="@+id/tv_harga"-->
-    <!--android:visibility="gone" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="3"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/price_course"-->
-    <!--android:visibility="gone" />-->
-    <!--</LinearLayout>-->
-
-    <LinearLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:id="@+id/line11"
-        android:orientation="vertical"></LinearLayout>
 </LinearLayout>

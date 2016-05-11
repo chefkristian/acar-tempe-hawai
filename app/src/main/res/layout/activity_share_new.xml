@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFF"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linear_share"
+            android:layout_margin="15dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:paddingTop="10dp"
+                android:layout_marginTop="70dp"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="THANK YOU FOR DOING\nTWIN HEARTS MEDITATION !"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#000000" />
+
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:text="Please spreading more light by sharing this app:"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:textColor="#000000"-->
+                <!--android:paddingTop="10dp" />-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingTop="15dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:text="Share this Meditation to your friend and family"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:textColor="#000" />-->
+
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share this app to spread more light"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/button_share"
+                android:layout_marginBottom="15dp"
+                android:textColor="#fff"
+                android:background="#689F38"
+                android:padding="10dp" />
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+
+                android:text="OR"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#000000"
+                android:paddingTop="0dp" />
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Give testimonial to us"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/button_share_atas"
+                android:layout_marginBottom="50dp"
+                android:textColor="#fff"
+                android:background="#689F38"
+                android:padding="10dp" />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:paddingTop="20dp"
+            android:layout_below="@+id/linear_share"
+            android:background="#e6e6e6"
+            android:id="@+id/linear_share2"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_margin="15dp"
+                android:textColor="#000000"
+                android:padding="15dp"
+                android:id="@+id/tv_share1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_horizontal"
+                android:text="Share your meditation experience to us and we will share it to others:" />
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:paddingTop="5dp"-->
+                <!--android:paddingLeft="15dp"-->
+                <!--android:paddingRight="15dp"-->
+                <!--android:id="@+id/tv_share2"-->
+                <!--android:layout_below="@+id/tv_share1"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:textColor="#000000"-->
+                <!--android:text="Bagikan pengalaman meditasi anda kepada kami dan kami akan bagikan kepada yang lainnya:" />-->
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@+id/tv_share2"
+                android:gravity="top|left"
+                android:scrollbars="vertical"
+                android:id="@+id/et_sharing"
+                android:textSize="18sp"></EditText>
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/button_submit_share"
+                android:layout_marginBottom="50dp"
+                android:textColor="#fff"
+                android:background="#689F38"
+                android:padding="10dp" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

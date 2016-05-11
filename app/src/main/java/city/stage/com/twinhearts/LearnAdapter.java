@@ -54,14 +54,11 @@ public class LearnAdapter extends BaseAdapter {
     public View getView(int i, View view , ViewGroup viewGroup) {
 
 
-
         JadwalPHResult jadwal;
 
         view = mInflater.inflate(R.layout.learn_ph_jadwal, null);
 
         LinearLayout ll = (LinearLayout) view.findViewById(R.id.line11);
-
-
 
 
         jadwal = new JadwalPHResult();
@@ -73,7 +70,8 @@ public class LearnAdapter extends BaseAdapter {
 //        jadwal.lokasi_course = (TextView) view.findViewById(R.id.lokasi_course);
 //        jadwal.jadwal_course = (TextView) view.findViewById(R.id.jadwal_course);
 //        jadwal.price_course = (TextView) view.findViewById(R.id.price_course);
-        jadwal.tvHeader = (TextView) view.findViewById(R.id.tvHeader);
+        jadwal.tvHeaderTextView = (TextView) view.findViewById(R.id.tvHeaderTextView);
+        jadwal.tvHeader = (LinearLayout) view.findViewById(R.id.tvHeader);
 
         JSONObject jsonObject = (JSONObject) getItem(i);
 //        jadwal.tipe_kursus.setText(jsonObject.optString("jdwl_kursus_type"));
@@ -83,16 +81,22 @@ public class LearnAdapter extends BaseAdapter {
 
         jadwal.jenis_kursus.setText(jsonObject.optString("name"));
         jadwal.desc_course.setText(jsonObject.optString("descr"));
-        jadwal.tvHeader.setText(jsonObject.optString("courses"));
+        //jadwal.tvHeader.setText(jsonObject.optString("courses"));
 
 
 //            untuk munculin headers di item pertama tiap array mulai
-        if (i == sizeFirstArr || i == 0)
+        if (i == sizeFirstArr || i == 0){
             jadwal.tvHeader.setVisibility(View.VISIBLE);
-
-        else {
+            if (i == 0) {
+                jadwal.tvHeaderTextView.setText("ENTRY");
+            } else {
+                jadwal.tvHeaderTextView.setText("OTHERS");
+            }
+        }else {
             jadwal.tvHeader.setVisibility(View.GONE);
         }
+
+
 //            akhir munculin headers
 
 
@@ -171,8 +175,8 @@ public class LearnAdapter extends BaseAdapter {
         public TextView lokasi_kursus;
         public TextView jenis_kursus;
         public TextView desc_course, lokasi_course, jadwal_course, price_course;
-        public TextView tvHeader;
-
+        public TextView tvHeaderTextView;
+        public LinearLayout tvHeader;
     }
 
 }

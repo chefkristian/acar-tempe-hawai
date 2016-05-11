@@ -1,5 +1,6 @@
 package city.stage.com.twinhearts;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -36,20 +39,36 @@ import java.util.List;
  * Created by indomegabyte on 29/03/16.
  */
 public class SharedActivity extends AppCompatActivity implements View.OnClickListener {
-    Button button_share,button_submit_share;
+    Button button_share,button_submit_share, button_share_atas;
     EditText et_sharing;
     String MY_PREFS_NAME;
+//    ProgressBar progresBar;
+    private ProgressDialog progress;
+    LinearLayout linear_share2;
+    int flag_linear_share;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shared);
+        setContentView(R.layout.activity_share_new);
         button_submit_share = (Button)findViewById(R.id.button_submit_share);
         button_share = (Button)findViewById(R.id.button_share);
         et_sharing = (EditText)findViewById(R.id.et_sharing);
+//        progresBar = (ProgressBar)findViewById(R.id.progresBar);
+        button_share_atas = (Button)findViewById(R.id.button_share_atas);
+        linear_share2 = (LinearLayout)findViewById(R.id.linear_share2);
+
+        linear_share2.setVisibility(View.GONE);
+
+        flag_linear_share = 0;
+
+//        progresBar.setVisibility(View.GONE);
 
         button_share.setOnClickListener(this);
         button_submit_share.setOnClickListener(this);
+        button_share_atas.setOnClickListener(this);
+        progress=new ProgressDialog(this);
 
 
 
@@ -61,17 +80,50 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view.getId()== R.id.button_share){
+
+            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+            String url_sharing = prefs.getString("url_dishare",null);
+            Log.d("zzzzzzz",url_sharing);
+
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_SUBJECT, "Detik");
-            i.putExtra(Intent.EXTRA_TEXT, "http://www.detik.com");
+            i.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL");
+            i.putExtra(Intent.EXTRA_TEXT, url_sharing);
             startActivity(Intent.createChooser(i, "Share URL"));
+
+        }
+
+        if (view.getId()== R.id.button_share_atas){
+
+            Log.d("share_Atas",Integer.toString(flag_linear_share));
+            if (flag_linear_share == 0){
+                linear_share2.setVisibility(View.VISIBLE);
+                flag_linear_share = 1;
+                Log.d("share_Atas_0",Integer.toString(flag_linear_share));
+            }
+            else if (flag_linear_share == 1) {
+                linear_share2.setVisibility(View.GONE);
+                flag_linear_share = 0;
+                Log.d("share_Atas_1",Integer.toString(flag_linear_share));
+            }
 
         }
         else if (view.getId()==R.id.button_submit_share){
 
+            if(et_sharing.getText().toString().equals("")){
+                Toast.makeText(getApplicationContext(), "Please fill your meditation experience", Toast.LENGTH_LONG).show();
 
-            new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveFeedback");
+            }
+            else {
+
+//                progresBar.setVisibility(View.VISIBLE);
+                progress.setMessage("Submitting your experience");
+                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progress.setIndeterminate(true);
+                progress.setProgress(0);
+                progress.show();
+                new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveFeedback");
+            }
 
 
                 //get message from message box
@@ -162,8 +214,10 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
         protected void onPostExecute(String result) {
 //            pb.setVisibility(View.GONE);
             et_sharing.setText("");
+//            progresBar.setVisibility(View.GONE);
+            progress.dismiss();
 //            gambar_upload.setImageDrawable(null);
-            Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your experience has been successfully sent", Toast.LENGTH_LONG).show();
             Intent i = new Intent(SharedActivity.this,MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
