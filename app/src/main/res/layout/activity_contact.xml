@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+
+
+    <city.stage.com.twinhearts.AdjustableImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
         android:src="@drawable/learn_ph2"
-        android:scaleType="fitXY" />
+        android:adjustViewBounds="true"
+        android:id="@+id/image_contact"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -111,3 +120,4 @@ Telp : +62 21 22210269\n"
 
 
 </LinearLayout>
+    </ScrollView>
