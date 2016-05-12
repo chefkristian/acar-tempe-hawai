@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="TWINHEARTS MEDITATION"
+        android:text="TWIN HEARTS MEDITATION"
         android:textColor="#000"
         android:id="@+id/twinheart"
        android:textAppearance="?android:attr/textAppearanceLarge"

@@ -10,32 +10,5 @@
         android:src="@drawable/pray"
         android:scaleType="fitXY"/>
 
-    <!--<TextView-->
-        <!--android:paddingTop="10dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Pray according to your religion."-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:gravity="center_horizontal" />-->
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Relax, enjoy and let go. Let's spread the love!"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:gravity="center_horizontal"/>-->
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Berdoalah sesuai kepercayaan anda."-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:paddingTop="10dp"-->
-        <!--android:gravity="center_horizontal"/>-->
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Rileks, nikmati dan berserahlah. Mari kita bagikan cinta!"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:gravity="center_horizontal"/>-->
 </LinearLayout>

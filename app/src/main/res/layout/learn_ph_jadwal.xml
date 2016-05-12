@@ -2,47 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
 
-    <LinearLayout android:id="@+id/tvHeader"
+    <LinearLayout
+        android:id="@+id/tvHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" android:background="#cccccc" android:padding="10dp" android:visibility="gone" >
+        android:orientation="vertical"
+        android:background="#cccccc"
+        android:padding="10dp"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvHeaderTextView"
             android:text="header"
             android:textSize="20dp"
-            android:textColor="#000"
-            />
+            android:textColor="#000" />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:padding="10dp" android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
 
-        android:id="@+id/jenis_course"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:gravity="center_vertical|left"
+            android:id="@+id/jenis_course"
+            android:textAppearance="?android:attr/textAppearanceLarge"
 
-        android:textStyle="bold"
-        />
+            android:gravity="center_vertical|left"
+
+            android:textStyle="bold" />
 
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/desc_course"
-        android:visibility="gone" android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/desc_course"
+            android:visibility="gone"
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:visibility="gone"
@@ -52,7 +56,6 @@
             android:id="@+id/line11"
             android:orientation="vertical"></LinearLayout>
     </LinearLayout>
-
 
 
 </LinearLayout>

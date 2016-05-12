@@ -509,44 +509,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initiatePopupWindow() {
-//        final PopupWindow pwindo;
-//        try {
-//// We need to get the instance of the LayoutInflater
-//            LayoutInflater inflater = (LayoutInflater) MainActivity.this
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View layout = inflater.inflate(R.layout.activity_popup_windows,
-//                    (ViewGroup) findViewById(R.id.popup_element));
-////           pwindo = new PopupWindow(layout, 800, 300, true);
-//            pwindo = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
-//            pwindo.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
-//
-//           Button button_close = (Button) layout.findViewById(R.id.button_close);
-//           Button button_update = (Button)layout.findViewById(R.id.button_update);
-//
-//            button_close.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    android.os.Process.killProcess(android.os.Process.myPid());
-//                    System.exit(1);
-//                    pwindo.dismiss();
-//
-//                }
-//            });
-//
-//            button_update.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    pwindo.dismiss();
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
-//                            ("market://details?id=com.today.goodfortune&hl=en")));
-//
-//                }
-//            });
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         final String url = prefs.getString("url_playstore",null);
 
@@ -576,40 +538,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initiatePopupWindownoForce() {
-//        final PopupWindow pwindo2;
-//
-//        try {
-//// We need to get the instance of the LayoutInflater
-//            LayoutInflater inflater = (LayoutInflater) MainActivity.this
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View layout = inflater.inflate(R.layout.activity_popwindow2,
-//                    (ViewGroup) findViewById(R.id.popup_element_noforce));
-//            pwindo2 = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
-//            pwindo2.showAtLocation(layout, Gravity.CENTER_HORIZONTAL, 0, 0);
-//
-//            Button button_close_noforce = (Button) layout.findViewById(R.id.button_close_noforce);
-//            Button button_update = (Button)layout.findViewById(R.id.button_update);
-//
-//            button_close_noforce.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                   pwindo2.dismiss();
-//                }
-//            });
-//
-//            button_update.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    pwindo2.dismiss();
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
-//                            ("market://details?id=com.today.goodfortune&hl=en")));
-//                }
-//            });
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         final String url = prefs.getString("url_playstore",null);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);

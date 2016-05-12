@@ -17,22 +17,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/exercise"/>
 
-    <!--<TextView-->
 
-        <!--android:lineSpacingMultiplier="1.2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Whenever possible, do a light 5 minutes evercise before and after the meditation."-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:gravity="center_horizontal"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:text="Jika memungkinkan, lakukan 5 menit olah raga ringan sebelum dan sesudah meditasi."-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:paddingTop="10dp"/>-->
 
     </LinearLayout>
 

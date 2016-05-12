@@ -32,11 +32,6 @@
         android:progressDrawable="@drawable/circular_progresbar"/>
 
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-        <!--android:text="ENTRY LEVEL"/>-->
 
     <ListView
         android:layout_width="fill_parent"

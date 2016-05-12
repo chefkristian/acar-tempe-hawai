@@ -14,14 +14,18 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:id="@+id/linear_ask1"
-
             android:layout_height="match_parent">
 
-            <ImageView
+
+            <city.stage.com.twinhearts.AdjustableImageView
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
                 android:src="@drawable/free_blessing"
-                android:scaleType="fitXY" />
+                android:adjustViewBounds="true"
+
+                />
 
 
             <com.facebook.login.widget.LoginButton
