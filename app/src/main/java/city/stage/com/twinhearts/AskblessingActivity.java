@@ -188,6 +188,7 @@ public class AskblessingActivity extends AppCompatActivity {
 
 
 
+
                 SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE).edit();
                 editor.putString("access token", (AccessToken.getCurrentAccessToken().getUserId()));
                 editor.commit();
@@ -529,7 +530,7 @@ public class AskblessingActivity extends AppCompatActivity {
 
             et_info.setText("");
             gambar_upload.setImageDrawable(null);
-            Toast.makeText(getApplicationContext(), "Your data has been saved and will be process", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your data has been saved and will be processed", Toast.LENGTH_LONG).show();
             Intent i = new Intent (AskblessingActivity.this,MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

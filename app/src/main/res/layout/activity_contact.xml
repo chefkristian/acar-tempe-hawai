@@ -113,7 +113,8 @@ Telp : +62 21 22210269\n"
         android:onClick="openURL"
         android:id="@+id/tv_web_contact"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"/>
 
 
 

@@ -75,7 +75,7 @@ public class MeditationActivity extends AppCompatActivity {
 
         bahasa = getIntent().getExtras().getString("meditasi");
         if (bahasa != null && bahasa.contentEquals("english")){
-            mediaPlayer = MediaPlayer.create(this, R.raw.twin_hearts_eng);
+            mediaPlayer = MediaPlayer.create(this, R.raw.twin_heart_eng);
         }
         if (bahasa.contentEquals("indo")){
             mediaPlayer = MediaPlayer.create(this,R.raw.twin_hearts_indo);
