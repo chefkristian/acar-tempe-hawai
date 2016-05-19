@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
@@ -56,6 +58,7 @@ public class MeditationActivity extends AppCompatActivity {
     public static int oneTimeOnly = 0;
     String bahasa, MY_PREFS_NAME_LOCATION, MY_PREFS_NAME;
     String LongitudePlay,LatitudePlay;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,7 +240,10 @@ public class MeditationActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
     }
 
     @Override
@@ -413,11 +419,17 @@ public class MeditationActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result) {
-//            pb.setVisibility(View.GONE);
-//            et_info.setText("");
-//            gambar_upload.setImageDrawable(null);
-//            Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
+
         }
+    }
+
+    private void sendScreenImageName() {
+
+        // [START screen_view_hit]
+        Log.i("TAG", "Meditation Activity");
+        mTracker.setScreenName("Meditation Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
     }
 
 }

@@ -13,9 +13,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -33,6 +37,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
      * and next wizard steps.
      */
     private ViewPager mPager;
+    private Tracker mTracker;
 
 
     /**
@@ -46,6 +51,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
+
 
 
         class ScreenSlidePagerAdapter1 extends FragmentStatePagerAdapter {
@@ -64,6 +70,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                     case 2: return ScreenSlidePageFragment3.newInstance("ThirdFragment, Instance 1");
                     case 3: return ScreenSlidePageFragment4.newInstance("ThirdFragment, Instance 2");
                     case 4: return ScreenSlidePageFragment5.newInstance("ThirdFragment, Instance 3");
+                    
                     default:
                         return ScreenSlidePageFragment.newInstance("FirstFragment, Default");
                 }
@@ -75,6 +82,10 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 return 5;
             }
         }
+
+
+
+
         class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
             public ScreenSlidePagerAdapter(FragmentManager fm) {
                 super(fm);
@@ -159,8 +170,10 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
             }
         });
 
-
-
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
 
     }
 
@@ -176,13 +189,20 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendScreenImageName();
+    }
 
+    private void sendScreenImageName() {
 
-
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
+        // [START screen_view_hit]
+        Log.i("TAG", "Screen Slide Activity");
+        mTracker.setScreenName("Screen Slide Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
+    }
 
 }
 

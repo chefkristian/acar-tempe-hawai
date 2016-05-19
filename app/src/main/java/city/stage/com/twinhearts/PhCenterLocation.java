@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.Locale;
 
@@ -14,6 +18,7 @@ import java.util.Locale;
  */
 public class PhCenterLocation extends AppCompatActivity implements View.OnClickListener {
     Button button_map;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +27,13 @@ public class PhCenterLocation extends AppCompatActivity implements View.OnClickL
         button_map = (Button)findViewById(R.id.button_map);
 
         button_map.setOnClickListener(this);
-        
+
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
+
+
     }
 
     @Override
@@ -43,5 +54,14 @@ public class PhCenterLocation extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
            startActivity(intent);
         }
+    }
+
+    private void sendScreenImageName() {
+
+        // [START screen_view_hit]
+        Log.i("TAG", "PH Center Location Activity");
+        mTracker.setScreenName("PH Center Location Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
     }
 }

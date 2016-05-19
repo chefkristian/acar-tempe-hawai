@@ -17,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
@@ -42,10 +44,10 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
     Button button_share,button_submit_share, button_share_atas;
     EditText et_sharing;
     String MY_PREFS_NAME;
-//    ProgressBar progresBar;
     private ProgressDialog progress;
     LinearLayout linear_share2;
     int flag_linear_share;
+    private Tracker mTracker;
 
 
     @Override
@@ -55,7 +57,7 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
         button_submit_share = (Button)findViewById(R.id.button_submit_share);
         button_share = (Button)findViewById(R.id.button_share);
         et_sharing = (EditText)findViewById(R.id.et_sharing);
-//        progresBar = (ProgressBar)findViewById(R.id.progresBar);
+
         button_share_atas = (Button)findViewById(R.id.button_share_atas);
         linear_share2 = (LinearLayout)findViewById(R.id.linear_share2);
 
@@ -63,14 +65,17 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
 
         flag_linear_share = 0;
 
-//        progresBar.setVisibility(View.GONE);
+
 
         button_share.setOnClickListener(this);
         button_submit_share.setOnClickListener(this);
         button_share_atas.setOnClickListener(this);
         progress=new ProgressDialog(this);
 
-
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
 
 
 
@@ -116,12 +121,12 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
             }
             else {
 
-//                progresBar.setVisibility(View.VISIBLE);
                 progress.setMessage("Submitting your experience");
                 progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progress.setIndeterminate(true);
                 progress.setProgress(0);
                 progress.show();
+
                 new MyAsyncTask().execute("http://twinheart.stage.city/twinheartapi/saveFeedback");
             }
 
@@ -212,17 +217,30 @@ public class SharedActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         protected void onPostExecute(String result) {
-//            pb.setVisibility(View.GONE);
+
             et_sharing.setText("");
-//            progresBar.setVisibility(View.GONE);
             progress.dismiss();
-//            gambar_upload.setImageDrawable(null);
+
             Toast.makeText(getApplicationContext(), "Your experience has been successfully sent", Toast.LENGTH_LONG).show();
             Intent i = new Intent(SharedActivity.this,MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
 
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendScreenImageName();
+    }
+
+    private void sendScreenImageName() {
+
+        // [START screen_view_hit]
+        Log.i("TAG", "Share Activity");
+        mTracker.setScreenName("Share Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
     }
 
 

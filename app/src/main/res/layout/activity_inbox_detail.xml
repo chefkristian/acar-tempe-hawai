@@ -20,19 +20,20 @@
         android:padding="10dp"
         android:paddingBottom="5dp"
         android:textColor="#000"
-
         android:id="@+id/title_inbox"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold"/>
+
     <TextView
         android:layout_width="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#444444"
         android:layout_height="wrap_content"
         android:id="@+id/msg_inbox"/>
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,6 +44,42 @@
         android:onClick="open"
         android:layout_gravity="center_horizontal"
         android:id="@+id/button_inbox"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Message"
+        android:padding="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:onClick="send_sms"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/button_send_message"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call"
+        android:padding="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:onClick="call"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/button_phone"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Mail"
+        android:padding="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:onClick="send_mail"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/button_send_mail"/>
+
+
+
 
 </LinearLayout>
     </ScrollView>

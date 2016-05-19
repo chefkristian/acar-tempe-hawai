@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -29,6 +31,7 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
     ListView list_learn_ph, list_learn_ph2;
     LearnAdapter mJSONAdapter, mJSONAdapter2;
     ProgressBar progresBar;
+    private Tracker mTracker;
 
 
     @Override
@@ -43,14 +46,11 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
         progresBar = (ProgressBar)findViewById(R.id.progresBar);
 
 
-//        list_learn_ph2 = (ListView)findViewById(R.id.list_learn_ph2);
-
         mJSONAdapter  = new LearnAdapter(this,getLayoutInflater());
-//        mJSONAdapter2 = new LearnAdapter(this,getLayoutInflater());
 
 
         list_learn_ph.setAdapter(mJSONAdapter);
-//        list_learn_ph2.setAdapter(mJSONAdapter2);
+
 
 
 
@@ -105,7 +105,11 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
 
 
         list_learn_ph.setOnItemClickListener(this);
-//        list_learn_ph2.setOnItemClickListener(this);
+
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
     }
 
 
@@ -126,51 +130,6 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
             ll.setVisibility(View.GONE);
         }
 
-//        TextView lokasi_couses = (TextView)view.findViewById(R.id.lokasi_course);
-//        if (lokasi_couses.getVisibility()==TextView.GONE){
-//            lokasi_couses.setVisibility(TextView.VISIBLE);
-//        } else {
-//            lokasi_couses.setVisibility(TextView.GONE);
-//        }
-//
-//        TextView lokasi = (TextView)view.findViewById(R.id.tv_lokasi);
-//        if (lokasi.getVisibility()==TextView.GONE){
-//            lokasi.setVisibility(TextView.VISIBLE);
-//        } else {
-//            lokasi.setVisibility(TextView.GONE);
-//        }
-
-//        TextView jadwal_course = (TextView)view.findViewById(R.id.jadwal_course);
-//        if (jadwal_course.getVisibility()==TextView.GONE){
-//            jadwal_course.setVisibility(TextView.VISIBLE);
-//        } else {
-//            jadwal_course.setVisibility(TextView.GONE);
-//        }
-//
-//        TextView jadwal = (TextView)view.findViewById(R.id.tv_jadwal);
-//        if (jadwal.getVisibility()==TextView.GONE){
-//            jadwal.setVisibility(TextView.VISIBLE);
-//        } else {
-//            jadwal.setVisibility(TextView.GONE);
-//        }
-
-//        TextView harga_course = (TextView)view.findViewById(R.id.price_course);
-//        if (harga_course.getVisibility()==TextView.GONE){
-//            harga_course.setVisibility(TextView.VISIBLE);
-//        } else {
-//            harga_course.setVisibility(TextView.GONE);
-//        }
-//
-//        TextView harga = (TextView)view.findViewById(R.id.tv_harga);
-//        if (harga.getVisibility()==TextView.GONE){
-//            harga.setVisibility(TextView.VISIBLE);
-//        } else {
-//            harga.setVisibility(TextView.GONE);
-//        }
-
-
-
-
 
     }
 
@@ -179,5 +138,20 @@ public class LearnPhActivity extends AppCompatActivity implements AdapterView.On
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + number));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendScreenImageName();
+    }
+
+    private void sendScreenImageName() {
+
+        // [START screen_view_hit]
+        Log.i("TAG", "LearnPH Activity");
+        mTracker.setScreenName("LearnPH Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
     }
 }

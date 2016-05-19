@@ -19,6 +19,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -30,12 +31,16 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.login.widget.ProfilePictureView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,12 +58,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -85,6 +94,7 @@ public class AskblessingActivity extends AppCompatActivity {
     private ProgressDialog progress;
     LinearLayout linear_ask2;
     int flag_gambar;
+    private Tracker mTracker;
 
 
     @Override
@@ -104,8 +114,13 @@ public class AskblessingActivity extends AppCompatActivity {
         button_submit = (Button) findViewById(R.id.button_submit);
         button_upload = (ImageView) findViewById(R.id.button_upload);
         gambar_upload = (ImageView) findViewById(R.id.gambar_upload);
-//        button_camera = (ImageView) findViewById(R.id.button_camera);
         button_facebook = (LoginButton) findViewById(R.id.button_facebook);
+
+        button_facebook.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_birthday", "user_friends"));
+
+
+
         profilePictureView = (ProfilePictureView) findViewById(R.id.profil_image);
         linear_ask2 = (LinearLayout)findViewById(R.id.linear_ask2);
 
@@ -114,10 +129,14 @@ public class AskblessingActivity extends AppCompatActivity {
         et_info.setVisibility(View.GONE);
         nama_profile.setVisibility(View.GONE);
         button_submit.setVisibility(View.GONE);
-//        button_camera.setVisibility(View.GONE);
         button_upload.setVisibility(View.GONE);
         gambar_upload.setVisibility(View.GONE);
         linear_ask2.setVisibility(View.GONE);
+
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
 
         progress=new ProgressDialog(this);
 
@@ -133,7 +152,6 @@ public class AskblessingActivity extends AppCompatActivity {
             nama_profile.setVisibility(View.VISIBLE);
             button_submit.setVisibility(View.VISIBLE);
             button_upload.setVisibility(View.VISIBLE);
-//                button_camera.setVisibility(View.VISIBLE);
             gambar_upload.setVisibility(View.VISIBLE);
             linear_ask2.setVisibility(View.VISIBLE);
         }
@@ -151,7 +169,6 @@ public class AskblessingActivity extends AppCompatActivity {
                     et_info.setVisibility(View.GONE);
                     button_submit.setVisibility(View.GONE);
                     button_upload.setVisibility(View.GONE);
-//                    button_camera.setVisibility(View.GONE);
                     gambar_upload.setVisibility(View.GONE);
                     nama_profile.setVisibility(View.GONE);
                     linear_ask2.setVisibility(View.GONE);
@@ -182,15 +199,43 @@ public class AskblessingActivity extends AppCompatActivity {
                 nama_profile.setVisibility(View.VISIBLE);
                 button_submit.setVisibility(View.VISIBLE);
                 button_upload.setVisibility(View.VISIBLE);
-//                button_camera.setVisibility(View.VISIBLE);
                 gambar_upload.setVisibility(View.VISIBLE);
                 linear_ask2.setVisibility(View.VISIBLE);
 
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("LoginActivity", response.toString());
+
+
+                                // Application code
+                                try {
+                                    String email = object.getString("email");
+                                    Log.d("emaillll", email);
+//                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE).edit();
+//                                    editor.putString("email user", email);
+//                                    editor.commit();
+
+                                    String birthday = object.getString("birthday");
+                                    Log.d("dob", birthday);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
 
 
 
                 SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE).edit();
                 editor.putString("access token", (AccessToken.getCurrentAccessToken().getUserId()));
+
                 editor.commit();
 
 
@@ -467,6 +512,9 @@ public class AskblessingActivity extends AppCompatActivity {
 
                 String fb_id = AccessToken.getCurrentAccessToken().getUserId().toString();
 
+//                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+//                String email_user_fb = prefs.getString("email user", null);
+
 
                 gambar_upload.buildDrawingCache();
                 Bitmap bmp = gambar_upload.getDrawingCache();
@@ -575,6 +623,21 @@ public class AskblessingActivity extends AppCompatActivity {
 //            }
 //        }
 //
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendScreenImageName();
+
+    }
+    private void sendScreenImageName() {
+
+        // [START screen_view_hit]
+        Log.i("TAG", "Ask Blessing Activity");
+        mTracker.setScreenName("Ask  Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
     }
 }
 

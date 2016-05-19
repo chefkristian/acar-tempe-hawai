@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * Created by indomegabyte on 28/03/16.
@@ -14,6 +18,7 @@ import android.widget.Button;
 public class FirsttimeActivity extends AppCompatActivity implements View.OnClickListener {
     Button button_ya, button_tidak;
 String bahasa;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,11 @@ String bahasa;
         button_tidak.setOnClickListener(this);
 
         bahasa = getIntent().getExtras().getString("meditasi");
+
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
 
     }
 
@@ -43,5 +53,20 @@ String bahasa;
             i.putExtra("meditasi",bahasa);
             startActivity(i);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendScreenImageName();
+    }
+
+    private void sendScreenImageName() {
+
+        // [START screen_view_hit]
+        Log.i("TAG", "First time Activity");
+        mTracker.setScreenName("First time Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
     }
 }

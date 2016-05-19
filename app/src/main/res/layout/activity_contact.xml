@@ -53,8 +53,18 @@
             android:onClick="callSolo"
             android:text="Jl.Urip Sumoharjo 91\n
 57129 Solo\n
-Tel.: +62-271-652828"
+Telp : +62-271-652828"
             android:gravity="center_horizontal" />
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text=""-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:onClick="callSolo"-->
+            <!--android:gravity="center_horizontal"/>-->
+
 
 
     </LinearLayout>
@@ -80,15 +90,32 @@ Tel.: +62-271-652828"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:textColor="#000"
-            android:id="@+id/tv_contact_jakarta"
             android:onClick="callJakarta"
-
+            android:id="@+id/tv_contact_jakarta"
             android:text="Pranic Healing Center\n
 Bintaro Jaya Sektor 9 Ruko AO2\n
 Belakang McDonald\n
 Bintaro Tangerang\n
-Telp : +62 21 22210269\n"
+Telp : +62 21 22210269
+"
             android:gravity="center_horizontal" />
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text=""-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:onClick="callJakarta"-->
+            <!--android:gravity="center_horizontal"/>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Message : +62 00000000"-->
+            <!--android:textColor="#000"-->
+            <!--android:onClick="sendSMS"-->
+            <!--android:gravity="center_horizontal"/>-->
 
 
     </LinearLayout>
@@ -112,6 +139,18 @@ Telp : +62 21 22210269\n"
         android:textColor="#000"
         android:onClick="openURL"
         android:id="@+id/tv_web_contact"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="10dp"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="www.globalpranichealing.com"
+        android:gravity="center_horizontal"
+        android:textColor="#000"
+        android:onClick="openURLGlobal"
+        android:id="@+id/tv_web_contact_global"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"/>

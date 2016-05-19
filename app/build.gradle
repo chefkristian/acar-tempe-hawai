@@ -10,8 +10,8 @@ android {
         applicationId "city.stage.com.twinhearts"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
@@ -31,5 +31,7 @@ dependencies {
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile "com.google.android.gms:play-services-gcm:8.3.0"
     compile 'com.squareup.picasso:picasso:2.1.1'
+    compile 'com.github.k0shk0sh:PermissionHelper:1.0.7'
+    compile 'com.google.android.gms:play-services-analytics:8.3.0'
 
 }

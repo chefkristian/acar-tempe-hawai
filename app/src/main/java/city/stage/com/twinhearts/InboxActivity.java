@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,16 +24,17 @@ public class InboxActivity extends AppCompatActivity implements AdapterView.OnIt
     ListView list_inbox;
     ProgressBar progresBar;
     InboxAdapter mJSONAdapter;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
 
-        list_inbox = (ListView)findViewById(R.id.list_inbox);
-        progresBar = (ProgressBar)findViewById(R.id.progresBar);
+        list_inbox = (ListView) findViewById(R.id.list_inbox);
+        progresBar = (ProgressBar) findViewById(R.id.progresBar);
 
-        mJSONAdapter  = new InboxAdapter(this,getLayoutInflater());
+        mJSONAdapter = new InboxAdapter(this, getLayoutInflater());
 
         list_inbox.setAdapter(mJSONAdapter);
 
@@ -62,14 +65,34 @@ public class InboxActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
 
                 });
-list_inbox.setOnItemClickListener(this);
+        list_inbox.setOnItemClickListener(this);
+
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        sendScreenImageName();
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         JSONObject jsonObject = (JSONObject) mJSONAdapter.getItem(i);
         Intent detailIntent = new Intent(this, InboxDetailActivity.class);
-        detailIntent.putExtra("json",  jsonObject.toString());
+        detailIntent.putExtra("json", jsonObject.toString());
         startActivity(detailIntent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendScreenImageName();
+    }
+
+    private void sendScreenImageName() {
+
+        // [START screen_view_hit]
+        Log.i("TAG", "Inbox Activity");
+        mTracker.setScreenName("Inbox Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // [END screen_view_hit]
     }
 }

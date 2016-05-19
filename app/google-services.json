@@ -1,36 +1,32 @@
 {
   "project_info": {
-    "project_id": "twin-hearts",
     "project_number": "959497412037",
-    "name": "Twin Hearts"
+    "project_id": "twin-hearts"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:959497412037:android:6f31d37d96f135d4",
-        "client_id": "android:city.stage.com.twinhearts",
-        "client_type": 1,
         "android_client_info": {
-          "package_name": "city.stage.com.twinhearts",
-          "certificate_hash": []
+          "package_name": "city.stage.com.twinhearts"
         }
       },
       "oauth_client": [],
-      "api_key": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF-kIz3AaN3CwdGU3nvKQZP9goudnu10Q"
+        }
+      ],
       "services": {
         "analytics_service": {
-          "status": 1
-        },
-        "cloud_messaging_service": {
           "status": 2,
-          "apns_config": []
+          "analytics_property": {
+            "tracking_id": "UA-73991049-3"
+          }
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
-        },
-        "google_signin_service": {
-          "status": 1
         },
         "ads_service": {
           "status": 1
@@ -38,6 +34,5 @@
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }
